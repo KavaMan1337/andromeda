@@ -2119,6 +2119,7 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
           <span className="footer-link" onClick={onGoFaq}>FAQ</span>
           <span className="footer-link" onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>Discord</span>
           <span className="footer-link" onClick={onGoTerms}>Terms of Service</span>
+          <span className="footer-link" onClick={()=>setPage("privacy")}>Privacy Policy</span>
         </div>
         <div className="footer-copy">© 2026 Andromeda. All rights reserved.</div>
       </footer>
@@ -2153,38 +2154,46 @@ function FAQPage({ onGoStore, onGoTerms }) {
         { id:"p3", q:"Is my payment information secure?",
           a:<p>Yes. We never store your card details. All card transactions go through Stripe, which is PCI-DSS Level 1 certified. Crypto payments require no personal financial data at all.</p> },
         { id:"p4", q:"Do you offer refunds?",
-          a:<p>Due to the digital nature of our products, we generally do not offer refunds once a key has been issued. However, if you experience a technical issue we cannot resolve within 72 hours, contact support and we will review your case individually.</p> },
+          a:<><p>No. All digital product purchases on Andromeda are <strong style={{color:'var(--gp)'}}>final and non-refundable</strong> once a license key has been issued. This is because digital goods, once delivered, cannot be "returned" — the key has been activated and can no longer be considered new or resalable.</p><p>Refunds are not available for: change of mind, dissatisfaction with features after purchase, game patches or executor changes, account bans by game platforms, or hardware/connectivity issues on your end.</p><p>If you experience a <strong>documented, unresolved technical failure</strong> that our team cannot fix within 72 hours of you providing full diagnostic information, we may — at our <strong>sole discretion</strong> — offer a replacement key or account credit. This is not guaranteed.</p><p>To request a review, contact us on Discord within <strong>48 hours</strong> of purchase with your order ID and a detailed description of the issue.</p></> },
+        { id:"p5", q:"What happens if my payment fails or is reversed?",
+          a:<><p>If a payment fails, is declined, or is flagged by our fraud systems, the order is automatically cancelled and no license key is issued. If a chargeback or payment dispute is filed after a key has been issued, your account and all associated keys will be <strong>immediately and permanently terminated</strong> without refund. We may also block your details from future purchases.</p></> },
       ]
     },
     {
       title: "Delivery & Access",
       items: [
         { id:"d1", q:"How do I receive my script after purchase?",
-          a:<p>Delivery is <strong style={{color:'var(--gp)'}}>instant</strong>. Your license key appears in your account dashboard immediately after payment is confirmed. You can also find it in your Order History.</p> },
-        { id:"d2", q:"What executor do I need to run the script?",
-          a:<p>Andromeda is compatible with <strong style={{color:'var(--ts)'}}>Volt</strong> (recommended), as well as other high-level executors. Make sure your executor is up to date before injecting.</p> },
+          a:<p>Delivery is <strong style={{color:'var(--gp)'}}>instant</strong>. Your license key appears in your account dashboard immediately after payment is confirmed. You can also find it in your Order History. Keys are delivered directly via the in-site dashboard — no email confirmation is required.</p> },
+        { id:"d2", q:"What executor do I need?",
+          a:<><p>Both <strong style={{color:'var(--gp)'}}>Andromeda Script</strong> and <strong style={{color:'var(--gp)'}}>Neptune Hub</strong> are compatible with <strong style={{color:'var(--ts)'}}>Volt</strong> (recommended) as well as other high-level executors. Make sure your executor is up to date before injecting. An outdated executor may cause the script to fail or behave unexpectedly — this is not covered by our support.</p></> },
         { id:"d3", q:"Can I use my key on multiple devices?",
-          a:<p>Each key is tied to a single HWID (hardware ID). If you need to reset your HWID, contact support — we allow one free reset per 30 days.</p> },
+          a:<><p>No. Each key is bound to a single hardware ID (HWID). You may not use your key on more than one device at a time. If you switch to a new computer or reformatted system, you can request an HWID reset via our Discord — we allow <strong>one free reset per 30-day rolling period</strong>. We are not responsible for unauthorized use of your key if you share your account or leave your credentials exposed.</p></> },
+        { id:"d4", q:"Can I share my account or key with a friend?",
+          a:<p><strong style={{color:'#EF4444'}}>No.</strong> Account sharing and key sharing are strictly prohibited. Sharing your license key with any third party — including friends or family — will result in the immediate and permanent revocation of your key without refund or appeal. Your HWID and account may also be banned from future purchases.</p> },
       ]
     },
     {
       title: "Safety & Detection",
       items: [
-        { id:"s1", q:"Is the script safe to use? Will I get banned?",
-          a:<p>Andromeda includes a built-in <strong style={{color:'var(--gp)'}}>Anti-Detection engine</strong> with server-side spoofing, a humanizer, and randomized timing. Our detection rate is currently <strong style={{color:'#10B981'}}>0 confirmed bans</strong>. However, no cheat is 100% undetectable forever — use at your own risk and stay updated.</p> },
+        { id:"s1", q:"Are your scripts safe to use? Will I get banned?",
+          a:<><p>Both Andromeda Script and Neptune Hub include built-in <strong style={{color:'var(--gp)'}}>Anti-Detection engines</strong> with server-side spoofing, a humanizer, and randomized timing. Our detection rate for Andromeda Script is currently <strong style={{color:'#10B981'}}>0 confirmed bans</strong>. However, <strong>no cheat is 100% undetectable</strong> — this is not possible and we make no such claim. Use at your own risk and stay updated with the latest script version.</p><p>Andromeda is not responsible for any bans or suspensions issued by Roblox Corporation, any game developer, or any third-party platform.</p></> },
         { id:"s2", q:"How quickly do you patch after a game update?",
-          a:<p>Our team monitors Deepwoken patches 24/7. Critical updates that break functionality are typically patched within <strong style={{color:'var(--gp)'}}>2–6 hours</strong>. We post status updates in our Discord.</p> },
+          a:<p>Our teams monitor game patches 24/7 across supported titles. Critical updates that break functionality are typically patched within <strong style={{color:'var(--gp)'}}>2–6 hours</strong>. Status updates are posted in our Discord. We do not guarantee a specific patch time and are not liable for downtime caused by third-party game updates.</p> },
+        { id:"s3", q:"Does this violate Roblox's Terms of Service?",
+          a:<p>Yes — using third-party scripts in Roblox games may violate Roblox Corporation's Terms of Service and/or End User License Agreement. Andromeda provides these products as-is, and the decision to use them is yours. We bear no responsibility for any consequences resulting from your use of our products within Roblox or any other platform.</p> },
       ]
     },
     {
       title: "Technical Support",
       items: [
-        { id:"t1", q:"The script isn't working — what do I do?",
-          a:<p>First, make sure your executor is updated and Roblox is not running in the background. Re-inject after a fresh game launch. If the issue persists, open a support ticket in our Discord with your executor version and error message.</p> },
+        { id:"t1", q:"A script isn't working — what do I do?",
+          a:<><p>First, verify that your executor is fully updated and that Roblox is not running in the background. Re-inject after a fresh game launch. If the issue persists, open a support ticket in our Discord with: your executor name and version, the product (Andromeda Script or Neptune Hub), the game you are running it on, and a description of the error or unexpected behavior. Generic "it's not working" messages without details cannot be resolved.</p><p>Please note: we cannot assist with issues caused by outdated executors, unofficial/modified versions of our scripts, or hardware configurations outside of standard consumer setups.</p></> },
         { id:"t2", q:"How do I contact support?",
-          a:<p>The fastest way is our <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>Discord server</strong>. Average response time is under 2 hours. You can also email us via the contact form. For order issues, reference your Order ID from the dashboard.</p> },
+          a:<p>The only official support channel is our <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>Discord server</strong>. Average response time is under 2 hours. We do not respond to support requests sent via social media, third-party websites, or any channel other than our official Discord. For order issues, always reference your Order ID.</p> },
         { id:"t3", q:"Where can I read the full Terms of Service?",
           a:<><p>Our full Terms of Service and Privacy Policy are available at any time.</p><button className="hero-cta-o" style={{marginTop:10,padding:'8px 16px',fontSize:13}} onClick={onGoTerms}><span>Read Terms →</span></button></> },
+        { id:"t4", q:"I was banned in-game. Can you help?",
+          a:<p>No. In-game bans, suspensions, or any other disciplinary action taken by Roblox Corporation, game developers, or any other platform are entirely outside of our control and responsibility. We are not able to assist with account recovery, ban appeals, or any related matters. We recommend contacting the relevant platform directly. This is stated clearly in our Terms of Service.</p> },
       ]
     },
   ];
@@ -2222,32 +2231,156 @@ function FAQPage({ onGoStore, onGoTerms }) {
   );
 }
 
-// ── TERMS PAGE ────────────────────────────────────────────────────────────────
-function TermsPage({ onBack }) {
+// ── PRIVACY POLICY ────────────────────────────────────────────────────────────
+function PrivacyPage({ onBack }) {
   return (
     <div className="terms-pg">
       <div className="terms-hero">
-        <h1>Terms of Service</h1>
-        <p>Last updated: May 2026 · By using Andromeda you agree to these terms.</p>
+        <h1>Privacy Policy</h1>
+        <p>Last updated: May 23, 2026 · Andromeda respects your privacy. This policy describes what data we collect and how we use it.</p>
       </div>
 
       {[
-        { h:"1. Acceptance of Terms", body:<><p>By accessing or purchasing from Andromeda ("we", "our", "the Service"), you agree to be bound by these Terms of Service. If you do not agree, do not use this site or its products.</p></> },
-        { h:"2. Digital Products & Licensing", body:<><p>All products sold by Andromeda are digital goods in the form of software license keys. Upon purchase you receive a non-exclusive, non-transferable, single-user license to use the software for personal, non-commercial purposes.</p><ul><li>You may not resell, redistribute, or share your license key.</li><li>You may not reverse-engineer or modify the software.</li><li>Each key is bound to one hardware ID (HWID).</li></ul></> },
-        { h:"3. Payments & Refunds", body:<><p>Payments are processed via Stripe (cards), PayPal, or cryptocurrency networks. All prices are in USD. By completing a purchase you acknowledge:</p><ul><li>All sales are final once a license key is issued.</li><li>Refunds may be considered at our sole discretion in cases of unresolvable technical failure within 72 hours of purchase.</li><li>Chargebacks or payment disputes filed without first contacting support will result in permanent account termination.</li></ul></> },
-        { h:"4. Use of Service", body:<><p>You agree to use Andromeda products responsibly. You acknowledge that:</p><ul><li>Using third-party scripts in online games may violate the game's Terms of Service.</li><li>Andromeda is not responsible for any bans, suspensions, or penalties imposed by game platforms.</li><li>You are solely responsible for how you use our software.</li></ul></> },
-        { h:"5. Cookies & Data", body:<><p>We use cookies to maintain your session and improve site functionality. We collect only the minimum data necessary (email, purchase history) to operate the service. We do not sell your data to third parties. See our Privacy Policy for details.</p></> },
-        { h:"6. Intellectual Property", body:<><p>All content on this site — including logos, code, and product descriptions — is the intellectual property of Andromeda. Unauthorized reproduction or distribution is prohibited.</p></> },
-        { h:"7. Limitation of Liability", body:<><p>Andromeda is provided "as is" without warranties of any kind. We are not liable for any indirect, incidental, or consequential damages arising from the use or inability to use our products. Our maximum liability is limited to the amount paid for your purchase.</p></> },
-        { h:"8. Modifications", body:<><p>We reserve the right to update these Terms at any time. Continued use of the Service after changes constitutes your acceptance of the updated Terms. Major changes will be announced via Discord.</p></> },
-        { h:"9. Contact", body:<><p>For any questions regarding these Terms, reach out via our Discord server or support email. We aim to respond within 24 hours.</p></> },
+        {
+          h:"1. Information We Collect",
+          body:<><p>When you use Andromeda, we may collect the following information:</p><ul><li><strong>Account information</strong> — email address and any information you provide during registration (name, Discord username, etc.).</li><li><strong>Purchase history</strong> — product names, tier, purchase date, order ID, and payment confirmation details.</li><li><strong>Hardware identifier (HWID)</strong> — associated with your license key for security and key management purposes.</li><li><strong>Usage data</strong> — browser type, operating system, pages visited, and general interaction patterns on our website (collected via cookies and server logs).</li><li><strong>Communication data</strong> — messages and tickets submitted through our Discord or contact channels.</li></ul><p>We do not collect any financial data (credit card numbers, bank account details) — all payment processing is handled by third-party providers (Stripe, cryptocurrency processors).</p></>
+        },
+        {
+          h:"2. How We Use Your Information",
+          body:<><p>We use the collected information solely for the following purposes:</p><ul><li>To create and maintain your account.</li><li>To deliver and manage your license keys.</li><li>To process purchases and send order-related communications.</li><li>To provide customer support via Discord.</li><li>To detect and prevent fraud, chargeback abuse, and Terms of Service violations.</li><li>To improve the functionality and security of the Service.</li></ul><p>We do not use your data for advertising, marketing profiling, or any purpose unrelated to the operation of Andromeda.</p></>
+        },
+        {
+          h:"3. Data Sharing",
+          body:<><p>We do not sell, rent, or trade your personal information to any third party. Your data may only be shared in the following circumstances:</p><ul><li>With our payment processing providers (Stripe, cryptocurrency networks) to complete transactions — governed by their own privacy policies.</li><li>With our hosting and infrastructure providers (Vercel, Render, MongoDB Atlas) strictly for the purpose of operating the Service.</li><li>With law enforcement or regulatory bodies if required by applicable law, court order, or legal process.</li><li>To enforce our Terms of Service, including in the event of chargebacks, fraud investigations, or account termination.</li></ul></>
+        },
+        {
+          h:"4. Data Retention",
+          body:<><p>We retain your account data for as long as your account remains active. If you request account deletion (see Section 6), we will delete your personal data within <strong>30 days</strong> of a verified request, subject to our legal obligations to retain certain records (e.g., transaction records for tax or legal compliance) for a period of up to 3 years.</p><p>License key and transaction records may be retained indefinitely for the purpose of preventing fraud, chargeback abuse, and Terms of Service violations.</p></>
+        },
+        {
+          h:"5. Cookies & Tracking",
+          body:<><p>Our website uses cookies to maintain session state, remember your preferences, and analyze site traffic. Cookies used include:</p><ul><li><strong>Essential cookies</strong> — required for the site to function (session, authentication, cart data).</li><li><strong>Analytics cookies</strong> — collect anonymous, aggregated usage data to help us understand how users interact with the site. You can decline analytics cookies via our cookie consent banner.</li></ul><p>You can manage or delete cookies through your browser settings. Disabling cookies may affect the functionality of the Service.</p></>
+        },
+        {
+          h:"6. Your Rights",
+          body:<><p>You have the right to:</p><ul><li>Request access to the personal data we hold about you.</li><li>Request correction of any inaccurate or incomplete data.</li><li>Request deletion of your account and personal data (subject to Section 4).</li><li>Opt out of non-essential analytics cookies via the cookie consent banner.</li></ul><p>To exercise any of these rights, contact us via our official Discord. We will respond within 7 business days. We reserve the right to verify your identity before processing any data-related request.</p></>
+        },
+        {
+          h:"7. Data Security",
+          body:<><p>We implement reasonable technical and organizational measures to protect your personal data from unauthorized access, alteration, disclosure, or destruction. These measures include encryption in transit (HTTPS/TLS), secure hosting infrastructure, and access controls on our databases.</p><p>No method of data transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security. You are responsible for keeping your account credentials confidential.</p></>
+        },
+        {
+          h:"8. Third-Party Services",
+          body:<><p>This Service integrates with the following third-party services, each governed by their own privacy policies:</p><ul><li><strong>Vercel</strong> — website hosting and CDN.</li><li><strong>Render</strong> — backend API hosting.</li><li><strong>MongoDB Atlas</strong> — database services.</li><li><strong>Stripe</strong> — payment processing.</li><li><strong>Google Gmail (Gmail SMTP)</strong> — transactional email delivery.</li><li><strong>Discord</strong> — customer support and community.</li></ul><p>We are not responsible for the privacy practices of these third parties. We encourage you to review their privacy policies.</p></>
+        },
+        {
+          h:"9. Children's Privacy",
+          body:<p>Andromeda is not directed at or intended for use by individuals under the age of 18. We do not knowingly collect personal data from minors. If we discover that personal data has been inadvertently collected from a minor, we will take steps to delete that data as soon as reasonably possible. Parents or guardians who believe their child has provided us with personal data should contact us immediately via Discord.</p>
+        },
+        {
+          h:"10. Changes to This Policy",
+          body:<><p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated "Last updated" date. We encourage you to review this policy periodically. Continued use of the Service after any change constitutes acceptance of the updated policy.</p></>
+        },
+        {
+          h:"11. Contact",
+          body:<p>For privacy-related questions, data access requests, or concerns, contact us exclusively through our official Discord: <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>discord.gg/9MK2Zepabc</strong>. We do not respond to privacy requests made through third-party platforms or social media.</p>
+        },
       ].map((s,i)=>(
         <div key={i}>
           <div className="terms-sec">
             <h2>{s.h}</h2>
             {s.body}
           </div>
-          {i < 8 && <div className="terms-divider"/>}
+          {i < 10 && <div className="terms-divider"/>}
+        </div>
+      ))}
+
+      <div style={{marginTop:40,padding:'20px 0',borderTop:'1px solid var(--gb)',
+        textAlign:'center',fontSize:13,color:'var(--tm)'}}>
+        © 2026 Andromeda. All rights reserved.{' '}
+        <span style={{color:'var(--gp)',cursor:'pointer'}} onClick={onBack}>← Back</span>
+      </div>
+    </div>
+  );
+}
+
+// ── TERMS PAGE ────────────────────────────────────────────────────────────────
+function TermsPage({ onBack }) {
+  return (
+    <div className="terms-pg">
+      <div className="terms-hero">
+        <h1>Terms of Service</h1>
+        <p>Last updated: May 23, 2026 · By accessing or purchasing from Andromeda you agree to these terms in full.</p>
+      </div>
+
+      {[
+        {
+          h:"1. Acceptance of Terms",
+          body:<><p>By accessing, browsing, or purchasing from the Andromeda website and any associated services (collectively, "the Service"), you confirm that you have read, understood, and agree to be bound by these Terms of Service ("Terms") in their entirety. If you do not agree to these Terms, you must immediately cease using the Service and may not purchase or use any products offered herein.</p><p>These Terms constitute a legally binding agreement between you ("the User", "you") and Andromeda ("we", "us", "our"). We reserve the right to amend these Terms at any time without prior notice. Continued use of the Service following any update constitutes your acceptance of the revised Terms. Major updates will be announced through our official Discord server.</p></>
+        },
+        {
+          h:"2. Nature of Products — Digital Goods",
+          body:<><p>All products sold by Andromeda are <strong style={{color:'var(--gp)'}}>digital goods</strong> delivered in the form of software license keys and/or access credentials. These goods are described in full on the product pages at the time of purchase.</p><p>By purchasing any digital product from Andromeda, you acknowledge and agree that:</p><ul><li>Digital goods, by their nature, are <strong>immediately delivered upon confirmation of payment</strong> and are <strong>not returnable</strong> once a license key has been issued or access has been granted.</li><li>The issuance of a license key constitutes the full delivery of the product. After a key is issued, the sale is final and non-refundable under all circumstances, including but not limited to: dissatisfaction with the product's features, changes in personal circumstances, change of mind, or inability to use the product due to external factors (e.g., executor incompatibility, game patches).</li><li>A delivered and activated license key can no longer be considered "new" or "resalable" and therefore has no残余 value. We are under no obligation to repurchase, refund, or exchange a delivered key.</li></ul><p>In the event of an unresolved technical failure (i.e., the product is completely non-functional and we are unable to resolve it within 72 hours of you contacting support with full diagnostic details), we may, at our <strong>sole and absolute discretion</strong>, offer a replacement key or account credit. This is not a guarantee and does not constitute an admission of liability.</p></>
+        },
+        {
+          h:"3. License & Permitted Use",
+          body:<><p>Upon purchase, you receive a <strong>non-exclusive, non-transferable, single-user license</strong> to use the purchased software. This license is personal to the purchasing account holder and may not be transferred, sold, gifted, or otherwise distributed to any third party under any circumstances.</p><ul><li>You may not resell, redistribute, share, or sublicense your license key or account access to any other person.</li><li>You may not reverse-engineer, decompile, disassemble, modify, or create derivative works based on any Andromeda software.</li><li>You may not use our products to harm, harass, or gain unfair advantage against other players in a manner that violates applicable law or the Terms of Service of the relevant game platform.</li><li>You may not use our products for any commercial purpose beyond personal use.</li></ul><p>Violation of any of the above conditions constitutes a <strong>material breach of these Terms</strong> and will result in immediate and permanent termination of your license and account, without refund.</p></>
+        },
+        {
+          h:"4. Hardware Binding & Account Security",
+          body:<><p>Each license key is bound to a single hardware identifier (HWID) at the time of activation. This binding is permanent for the duration of your license.</p><ul><li>You are solely responsible for keeping your account credentials and license keys secure and confidential.</li><li>We allow <strong>one HWID reset per 30-day rolling period</strong> provided you contact our official support channels (Discord). Requests beyond this limit require verifiable proof of hardware failure.</li><li>We are not responsible for unauthorized use of your account or key resulting from your failure to secure your credentials, including but not limited to sharing your account, providing your key to others, or using your account on shared/public devices.</li><li>Sharing your license key or account with another person, or attempting to use a key on more than one HWID simultaneously, will result in automatic and permanent key revocation without refund or appeal.</li></ul></>
+        },
+        {
+          h:"5. Payments & Order Processing",
+          body:<><p>All prices are listed in United States Dollars (USD) and are subject to change without notice. Price changes apply to new orders only and do not affect completed transactions.</p><p>Payments are processed securely via third-party payment providers. By completing a purchase, you agree to the terms and conditions of the respective payment provider (e.g., Stripe, cryptocurrency network).</p><ul><li>All completed orders are final. No cancellations, modifications, or reversals are possible after payment confirmation.</li><li>Orders placed in test/sandbox mode (where applicable) are clearly marked as non-delivery and do not constitute a real transaction.</li><li>If your payment method declines, is reversed, or is flagged by our fraud detection systems, we reserve the right to cancel the order and withhold the license key.</li></ul></>
+        },
+        {
+          h:"6. Refund Policy — Final Sale",
+          body:<><p>All Andromeda digital product purchases are final and non-refundable, unless a specific exception outlined in Section 2 applies.</p><p>Specifically, the following are <strong>not valid grounds for a refund</strong>:</p><ul><li>Change of mind after purchase.</li><li>Dissatisfaction with the product's features or performance after you have had the opportunity to review the product description and feature list prior to purchase.</li><li>Inability to use the product due to game patches, executor updates, or changes in third-party software environments.</li><li>Account suspension or ban by any game platform, for any reason.</li><li>Inability to use the product due to your own hardware limitations, operating system issues, or network conditions.</li></ul><p>Any refund request must be submitted via our official Discord support channel within <strong>48 hours</strong> of purchase and must include your order ID, email, and a detailed description of the issue. We reserve the right to deny any request submitted outside this window or lacking sufficient documentation.</p></>
+        },
+        {
+          h:"7. Chargebacks & Payment Disputes",
+          body:<><p>Initiating a chargeback, payment dispute, or reversal with your bank or payment provider — without first contacting Andromeda support and allowing us a reasonable opportunity to resolve the matter — is a <strong>direct violation of these Terms</strong>.</p><ul><li>Filing a chargeback on a completed transaction will result in <strong>immediate and permanent termination</strong> of your Andromeda account and all associated license keys, without refund.</li><li>All chargebacks will be disputed through the payment provider's dispute resolution process. We reserve the right to provide transaction records, product descriptions, and delivery confirmation as evidence.</li><li>Your account may be permanently banned from future purchases on the Service if a chargeback is filed.</li><li>If a chargeback is successfully processed and we do not recover the funds, we reserve the right to pursue any available legal remedies, including but not limited to referral to collection agencies and/or civil action for the original transaction amount plus associated fees.</li></ul></>
+        },
+        {
+          h:"8. Anti-Detection & Risk Acknowledgment",
+          body:<><p>Andromeda products include built-in anti-detection measures. However, you acknowledge and agree that:</p><ul><li>No software, script, or cheat is or can be guaranteed as 100% undetectable by any game platform's anti-cheat systems, now or in the future.</li><li>Using third-party scripts or software in online games, including Roblox, may violate the game's Terms of Service and/or End User License Agreement (EULA).</li><li>Andromeda bears no responsibility for any bans, suspensions, account terminations, penalties, or other disciplinary actions taken by Roblox Corporation, any game developer, or any other third-party platform.</li><li>You use all Andromeda products at your <strong>own risk and discretion</strong>. The decision to use our products is yours alone, and you accept full and sole responsibility for its consequences.</li></ul></>
+        },
+        {
+          h:"9. Service Availability & Updates",
+          body:<><p>We strive to maintain high service availability, but do not guarantee uninterrupted access to the website, store, or license management systems. Scheduled maintenance will be announced in advance via Discord where possible.</p><p>We reserve the right to:</p><ul><li>Update, modify, or discontinue any product at any time without prior notice.</li><li>Patch software in response to game updates, security vulnerabilities, or other changes in the third-party environment.</li><li>Suspend or terminate any account that violates these Terms, without refund.</li><li>Refuse service to any individual or entity at our sole discretion, including users with a history of chargebacks, fraud, or Terms violations.</li></ul></>
+        },
+        {
+          h:"10. Intellectual Property",
+          body:<><p>All products, logos, trademarks, code, designs, text, graphics, and other content on the Andromeda website and associated software are the exclusive intellectual property of Andromeda unless explicitly stated otherwise.</p><p>Unauthorized reproduction, distribution, copying, mirroring, scraping, or use of any intellectual property belonging to Andromeda — for commercial purposes or otherwise — is strictly prohibited and may be subject to legal action under applicable copyright and trademark law.</p></>
+        },
+        {
+          h:"11. Limitation of Liability",
+          body:<><p>Andromeda and its operators, affiliates, and partners shall not be held liable for any indirect, incidental, special, consequential, or punitive damages — including but not limited to loss of profits, loss of data, loss of game accounts, business interruption, or emotional distress — arising from or in connection with the use of or inability to use the Service or any products purchased through it.</p><p>In any event where Andromeda is found liable (which we dispute and deny), our <strong>total cumulative liability shall not exceed the amount you paid for the specific product giving rise to the claim</strong>. This limitation applies regardless of the legal theory under which the claim is brought and regardless of whether Andromeda was advised of the possibility of such damages.</p><p>You agree to indemnify, defend, and hold harmless Andromeda and its operators from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of the Service or your violation of these Terms.</p></>
+        },
+        {
+          h:"12. Account Termination",
+          body:<><p>We reserve the right to suspend, restrict, or permanently terminate your account and all associated license keys without notice, refund, or right of appeal, if:</p><ul><li>You violate any provision of these Terms.</li><li>You file or threaten to file a chargeback or payment dispute.</li><li>You share your account or license key with third parties.</li><li>You engage in fraudulent activity, including use of stolen payment methods.</li><li>You engage in harassing, abusive, or threatening behavior toward Andromeda staff or representatives.</li><li>You attempt to exploit, hack, or otherwise interfere with the normal operation of the Service.</li></ul><p>Accounts terminated under these conditions are ineligible for any refund, credit, or reinstatement. We may also block the associated email and/or HWID from future purchases.</p></>
+        },
+        {
+          h:"13. Governing Law & Dispute Resolution",
+          body:<><p>These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Andromeda operates, without regard to its conflict of law provisions.</p><p>Any dispute arising from or relating to these Terms or your use of the Service shall first be attempted to be resolved through good-faith negotiation between the parties. If resolution cannot be reached within 30 days, disputes shall be submitted to binding arbitration or the competent courts of the applicable jurisdiction.</p><p>You agree that any legal action or proceeding arising from these Terms shall be conducted individually and you waive any right to participate in or represent others in a class action or collective proceeding.</p></>
+        },
+        {
+          h:"14. Severability",
+          body:<><p>If any provision of these Terms is found to be invalid, illegal, or unenforceable by a court of competent jurisdiction, such provision shall be modified to the minimum extent necessary to make it valid and enforceable, or severed from these Terms if modification is not possible. All remaining provisions shall remain in full force and effect.</p></>
+        },
+        {
+          h:"15. Contact",
+          body:<><p>For questions, disputes, or concerns regarding these Terms or your account, contact us exclusively through our official Discord server: <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>discord.gg/9MK2Zepabc</strong></p><p>Response time is typically under 2 hours during business hours. We do not respond to inquiries made through social media direct messages, third-party platforms, or any channel other than our official Discord.</p></>
+        },
+      ].map((s,i)=>(
+        <div key={i}>
+          <div className="terms-sec">
+            <h2>{s.h}</h2>
+            {s.body}
+          </div>
+          {i < 14 && <div className="terms-divider"/>}
         </div>
       ))}
 
@@ -2467,6 +2600,12 @@ export default function App() {
       {page==="terms" && (
         <div className="page-enter" key="terms">
           <TermsPage onBack={()=>setPage("home")}/>
+        </div>
+      )}
+
+      {page==="privacy" && (
+        <div className="page-enter" key="privacy">
+          <PrivacyPage onBack={()=>setPage("home")}/>
         </div>
       )}
 

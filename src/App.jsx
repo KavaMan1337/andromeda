@@ -65,6 +65,64 @@ const PRODUCTS = [
       Status: "Undetected",
     },
   },
+  {
+    id: 2,
+    name: "Neptune Hub",
+    subtitle: "Universal Multi-Game",
+    category: "Roblox Script",
+    stock: 999,
+    rating: 4.7,
+    reviewCount: 34,
+    tags: ["Multi-Game", "Combat", "Visuals", "Automation", "ESP"],
+    description: "Neptune Hub is a universal script hub supporting multiple popular Roblox games. One subscription covers it all — combat enhancements, visuals, and automation for whichever game you're currently playing. Perfect for players who hop between games.",
+    features: [
+      { icon: "sword", label: "Combat", desc: "Aimbot, triggerbot, auto-aim with game-specific tuning" },
+      { icon: "eye", label: "Visuals", desc: "ESP, box outlines, name tags, skeleton view, item esp" },
+      { icon: "run", label: "Movement", desc: "Speed boost, fly, teleport, wall-walk per game" },
+      { icon: "bot", label: "Automations", desc: "Auto-farm, auto-collect, auto-level for supported titles" },
+      { icon: "shield", label: "Anti-Detection", desc: "Built-in spoof engine, randomized delays, safe-mode toggle" },
+      { icon: "zap", label: "Performance", desc: "60fps locked, low memory footprint, instant injection" },
+    ],
+    tiers: [
+      {
+        id: "standard",
+        name: "Standard",
+        price: 8,
+        color: "#06B6D4",
+        color2: "#8B5CF6",
+        badge: "POPULAR",
+        perks: [
+          "Access to 5+ supported games",
+          "Core Combat + Visuals",
+          "Standard Automation",
+          "Discord support",
+          "Lifetime updates",
+        ],
+      },
+      {
+        id: "pro",
+        name: "Pro",
+        price: 12,
+        color: "#F59E0B",
+        color2: "#EF4444",
+        badge: "BEST",
+        perks: [
+          "Everything in Standard",
+          "All supported games unlocked",
+          "Anti-Detection engine",
+          "Priority Discord support",
+          "Early access patches",
+          "Custom keybind profiles",
+        ],
+      },
+    ],
+    specs: {
+      Game: "Multiple Roblox Titles",
+      Executor: "Volt (recommended) + other high-level executors",
+      Updated: "May 2026",
+      Status: "Undetected",
+    },
+  },
 ];
 
 // ── REVIEWS ───────────────────────────────────────────────────────────────────
@@ -74,6 +132,11 @@ const INIT_REVIEWS = {
     { id: 2, user: "DuskBlade99", avatar: "DB", rating: 5, tier: "Premium", date: "2026-05-14", text: "The ESP and movement features are clean, no lag at all. Premium is a steal at $10." },
     { id: 3, user: "NebulaCaster", avatar: "NC", rating: 5, tier: "Rewrite", date: "2026-05-10", text: "Been using Andromeda for 2 weeks, zero bans. The humanizer actually works. 10/10." },
     { id: 4, user: "StarForge_X", avatar: "SF", rating: 4, tier: "Premium", date: "2026-05-07", text: "Great features overall. Could use a better UI for keybinds but functions perfectly." },
+  ],
+  2: [
+    { id: 1, user: "PixelRush", avatar: "PR", rating: 5, tier: "Pro", date: "2026-05-19", text: "Neptune Hub covers all the games I play. No more juggling different scripts — one hub handles everything." },
+    { id: 2, user: "GlitchHunter", avatar: "GH", rating: 4, tier: "Pro", date: "2026-05-15", text: "Solid multi-game hub. The per-game tuning is nice. Works great on Pet Simulator X." },
+    { id: 3, user: "ArcticNova", avatar: "AN", rating: 5, tier: "Standard", date: "2026-05-11", text: "Bought for Blox Fruits, works perfectly. Good value for the Standard tier." },
   ],
 };
 
@@ -1860,7 +1923,10 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
         <h1 className="hero-title">ANDROMEDA</h1>
         <p className="hero-sub">
           Premium scripts engineered for dominance. Combat, movement, visuals,
-          automation — all in one seamless package.
+          automation — all in one seamless package. We also offer a curated
+          selection of scripts for other popular games and premium executors
+          to power your gameplay. Whether you need raw firepower or clean
+          execution — Andromeda has you covered.
         </p>
         <div className="hero-ctas">
           <button className="hero-cta-p" onClick={onGoStore}><span>Explore Store →</span></button>
@@ -1927,12 +1993,12 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
         <div className="prod-prev-inner">
           <div className="sec-hd reveal reveal-delay-1">
             <div className="sec-eyebrow">Our Products</div>
-            <div className="sec-h2">Andromeda Script — Deepwoken</div>
+            <div className="sec-h2">Andromeda Script & Neptune Hub</div>
             <div className="sec-desc">Choose the tier that fits your playstyle. One-time payment, lifetime access.</div>
           </div>
           <div className="prod-prev-cards">
-            {PRODUCTS[0].tiers.map(t=>(
-              <div key={t.id} className="gc prev-tier stagger-item"
+            {[PRODUCTS[0].tiers[0], PRODUCTS[0].tiers[1], PRODUCTS[1].tiers[1]].map((t,i)=>(
+              <div key={t.id+i} className="gc prev-tier stagger-item"
                 style={{borderColor:`${t.color}50`,background:`linear-gradient(160deg,${t.color}10,${t.color2}06)`}}>
                 <div className="prev-tier-label" style={{color:t.color}}>{t.name}</div>
                 <div className="prev-tier-price" style={{
@@ -2066,6 +2132,17 @@ function FAQPage({ onGoStore, onGoTerms }) {
   const toggle = (id) => setOpen(o => o===id ? null : id);
 
   const groups = [
+    {
+      title: "Products",
+      items: [
+        { id:"pr1", q:"What scripts do you offer?",
+          a:<><p>Currently we offer two products:</p><ul><li><strong style={{color:'var(--gp)'}}>Andromeda Script</strong> — our flagship Deepwoken script with combat, movement, visuals, and automation. Priced at $10 (Premium) or $15 (Rewrite).</li><li><strong style={{color:'var(--gp)'}}>Neptune Hub</strong> — a universal multi-game hub supporting multiple Roblox titles. Priced at $8 (Standard) or $12 (Pro).</li></ul><p style={{marginTop:10}}>All purchases are one-time payments with lifetime access and updates.</p></> },
+        { id:"pr2", q:"What's the difference between Neptune Hub tiers?",
+          a:<><p><strong style={{color:'var(--gp)'}}>Standard</strong> gives you access to 5+ supported games with core combat and visual features.</p><p style={{marginTop:8}}><strong style={{color:'var(--gp)'}}>Pro</strong> unlocks all supported games, includes the Anti-Detection engine, priority support, and early access to patches.</p></> },
+        { id:"pr3", q:"Can I buy both scripts?",
+          a:<p>Yes! Each product is sold separately. You can purchase Andromeda Script for Deepwoken and Neptune Hub for multi-game functionality independently. Use a promo code like <strong style={{color:'var(--gp)'}}>NOVA5</strong> or <strong style={{color:'var(--gp)'}}>STAR10</strong> for bonus perks as you spend more.</p> },
+      ]
+    },
     {
       title: "Payments & Pricing",
       items: [

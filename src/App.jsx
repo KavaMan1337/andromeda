@@ -85,8 +85,8 @@ const PRODUCTS = [
     ],
     tiers: [
       {
-        id: "standard",
-        name: "Standard",
+        id: "premium",
+        name: "Premium",
         price: 10,
         color: "#06B6D4",
         color2: "#8B5CF6",
@@ -101,14 +101,14 @@ const PRODUCTS = [
         ],
       },
       {
-        id: "extended",
-        name: "Extended",
+        id: "beta",
+        name: "Beta",
         price: 15,
         color: "#F59E0B",
         color2: "#EF4444",
         badge: "BEST",
         perks: [
-          "Everything in Standard",
+          "Everything in Premium",
           "Full Automation suite",
           "Anti-Detection engine",
           "Priority Discord support",
@@ -1294,7 +1294,10 @@ function ProductPage({ product: p, onBack, onAddCart, user }) {
       {/* HERO */}
       <div className="gc pp-hero" style={{marginBottom:28}}>
         <div style={{position:'relative'}}>
-          <LogoSVG size={130} glow />
+          {p.id === 2
+            ? <img src="/project-rain.png" alt={p.name} style={{width:130,height:130,objectFit:'contain',borderRadius:12}} />
+            : <LogoSVG size={130} glow />
+          }
         </div>
         <div className="pp-sub">{p.subtitle}</div>
         <div className="pp-title">{p.name}</div>
@@ -1998,7 +2001,7 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
             <div className="sec-desc">Choose the tier that fits your playstyle. One-time payment, lifetime access.</div>
           </div>
           <div className="prod-prev-cards">
-            {[PRODUCTS[0].tiers[1], PRODUCTS[1].tiers[0], PRODUCTS[1].tiers[1]].map((t,i)=>(
+            {[PRODUCTS[0].tiers[0], PRODUCTS[0].tiers[1]].map((t,i)=>(
               <div key={t.id+i} className="gc prev-tier stagger-item"
                 style={{borderColor:`${t.color}50`,background:`linear-gradient(160deg,${t.color}10,${t.color2}06)`}}>
                 <div className="prev-tier-label" style={{color:t.color}}>{t.name}</div>

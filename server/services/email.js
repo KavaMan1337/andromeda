@@ -1,9 +1,41 @@
 import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 const API_KEY = process.env.RESEND_API_KEY;
 const resend = API_KEY ? new Resend(API_KEY) : null;
 const FROM = process.env.EMAIL_FROM || 'Andromeda <noreply@andromeda.gg>';
 const DEMO = process.env.EMAIL_DEMO_MODE === 'true';
+
+// ── Nodemailer / Ethereal setup ────────────────────────────────────────────
+const SMTP_HOST = process.env.SMTP_HOST;
+const SMTP_PORT = process.env.SMTP_PORT || '587';
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
+
+function createSmtpTransport() {
+  return nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: Number(SMTP_PORT),
+    secure: Number(SMTP_PORT) === 465,
+    auth: SMTP_USER ? { user: SMTP_USER, pass: SMTP_PASS } : undefined,
+  });
+}
+
+async function sendViaNodemailer(to, subject, html) {
+  const transport = createSmtpTransport();
+  const info = await transport.sendMail({
+    from: FROM,
+    to,
+    subject,
+    html,
+  });
+  // Ethereal: preview URL logged to console
+  if (SMTP_HOST?.includes('ethereal.email')) {
+    const preview = nodemailer.getTestMessageUrl(info);
+    if (preview) console.log('📧 Ethereal preview:', preview);
+  }
+  return { success: true, id: info.messageId };
+}
 
 // ── HTML email templates ────────────────────────────────────────────────────
 
@@ -109,7 +141,22 @@ function resetPasswordEmail(code) {
 // ── Send functions ──────────────────────────────────────────────────────────
 
 export async function sendVerificationEmail(email, code) {
-  if (!API_KEY || DEMO) {
+  if (DEMO) {
+    console.log('\n📧 [DEMO] Verification email to:', email);
+    console.log('   Code:', code, '(expires in 10 minutes)\n');
+    return { success: true, demo: true };
+  }
+
+  if (SMTP_HOST) {
+    try {
+      return await sendViaNodemailer(email, 'Verify your Andromeda account', verificationEmail(code));
+    } catch (err) {
+      console.error('SMTP error:', err.message);
+      return { success: false, error: err.message };
+    }
+  }
+
+  if (!API_KEY) {
     console.log('\n📧 [DEMO] Verification email to:', email);
     console.log('   Code:', code, '(expires in 10 minutes)\n');
     return { success: true, demo: true };
@@ -131,7 +178,22 @@ export async function sendVerificationEmail(email, code) {
 }
 
 export async function sendResetPasswordEmail(email, code) {
-  if (!API_KEY || DEMO) {
+  if (DEMO) {
+    console.log('\n📧 [DEMO] Password reset email to:', email);
+    console.log('   Code:', code, '(expires in 10 minutes)\n');
+    return { success: true, demo: true };
+  }
+
+  if (SMTP_HOST) {
+    try {
+      return await sendViaNodemailer(email, 'Reset your Andromeda password', resetPasswordEmail(code));
+    } catch (err) {
+      console.error('SMTP error:', err.message);
+      return { success: false, error: err.message };
+    }
+  }
+
+  if (!API_KEY) {
     console.log('\n📧 [DEMO] Password reset email to:', email);
     console.log('   Code:', code, '(expires in 10 minutes)\n');
     return { success: true, demo: true };

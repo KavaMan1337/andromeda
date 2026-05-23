@@ -67,57 +67,58 @@ const PRODUCTS = [
   },
   {
     id: 2,
-    name: "Neptune Hub",
-    subtitle: "Universal Multi-Game",
+    name: "Project Rain",
+    subtitle: "Deepwoken",
     category: "Roblox Script",
     stock: 999,
-    rating: 4.7,
-    reviewCount: 34,
-    tags: ["Multi-Game", "Combat", "Visuals", "Automation", "ESP"],
-    description: "Neptune Hub is a universal script hub supporting multiple popular Roblox games. One subscription covers it all — combat enhancements, visuals, and automation for whichever game you're currently playing. Perfect for players who hop between games.",
+    rating: 4.8,
+    reviewCount: 52,
+    tags: ["Combat", "Movement", "Visuals", "Automation", "ESP"],
+    description: "Project Rain is a powerful Deepwoken script designed for players who demand precision, speed, and an edge in combat. Featuring advanced combat utilities, smooth movement mechanics, and a full suite of visual overlays, Project Rain is built for players who want to dominate every encounter.",
     features: [
-      { icon: "sword", label: "Combat", desc: "Aimbot, triggerbot, auto-aim with game-specific tuning" },
-      { icon: "eye", label: "Visuals", desc: "ESP, box outlines, name tags, skeleton view, item esp" },
-      { icon: "run", label: "Movement", desc: "Speed boost, fly, teleport, wall-walk per game" },
-      { icon: "bot", label: "Automations", desc: "Auto-farm, auto-collect, auto-level for supported titles" },
-      { icon: "shield", label: "Anti-Detection", desc: "Built-in spoof engine, randomized delays, safe-mode toggle" },
-      { icon: "zap", label: "Performance", desc: "60fps locked, low memory footprint, instant injection" },
+      { icon: "sword", label: "Combat", desc: "Auto-parry, perfect block, combo extender, silent aim, hitbox manipulation" },
+      { icon: "run", label: "Movement", desc: "Fly, no-clip, speed hack, instant vault, player teleportation" },
+      { icon: "eye", label: "Visuals", desc: "ESP (players, mobs, chests), hitmarkers, tracer lines, custom overlay" },
+      { icon: "bot", label: "Automations", desc: "Auto-farm, auto-quest, auto-carry, mantra spam, configurable mob filter" },
+      { icon: "shield", label: "Anti-Detection", desc: "Server-side spoof, humanizer, randomized timing, active protection loop" },
+      { icon: "zap", label: "Performance", desc: "Memory-optimized, zero lag injection, 60fps locked execution" },
     ],
     tiers: [
       {
         id: "standard",
         name: "Standard",
-        price: 8,
+        price: 10,
         color: "#06B6D4",
         color2: "#8B5CF6",
         badge: "POPULAR",
         perks: [
-          "Access to 5+ supported games",
-          "Core Combat + Visuals",
-          "Standard Automation",
+          "All Combat features",
+          "All Movement features",
+          "ESP & Visuals",
+          "Basic Automations",
           "Discord support",
           "Lifetime updates",
         ],
       },
       {
-        id: "pro",
-        name: "Pro",
-        price: 12,
+        id: "extended",
+        name: "Extended",
+        price: 15,
         color: "#F59E0B",
         color2: "#EF4444",
         badge: "BEST",
         perks: [
           "Everything in Standard",
-          "All supported games unlocked",
+          "Full Automation suite",
           "Anti-Detection engine",
           "Priority Discord support",
-          "Early access patches",
+          "Early access to patches",
           "Custom keybind profiles",
         ],
       },
     ],
     specs: {
-      Game: "Multiple Roblox Titles",
+      Game: "Deepwoken (Roblox)",
       Executor: "Volt (recommended) + other high-level executors",
       Updated: "May 2026",
       Status: "Undetected",
@@ -134,11 +135,11 @@ const INIT_REVIEWS = {
     { id: 4, user: "StarForge_X", avatar: "SF", rating: 4, tier: "Premium", date: "2026-05-07", text: "Great features overall. Could use a better UI for keybinds but functions perfectly." },
   ],
   2: [
-    { id: 1, user: "PixelRush", avatar: "PR", rating: 5, tier: "Pro", date: "2026-05-19", text: "Neptune Hub covers all the games I play. No more juggling different scripts — one hub handles everything." },
-    { id: 2, user: "GlitchHunter", avatar: "GH", rating: 4, tier: "Pro", date: "2026-05-15", text: "Solid multi-game hub. The per-game tuning is nice. Works great on Pet Simulator X." },
-    { id: 3, user: "ArcticNova", avatar: "AN", rating: 5, tier: "Standard", date: "2026-05-11", text: "Bought for Blox Fruits, works perfectly. Good value for the Standard tier." },
+    { id: 1, user: "StormBringer", avatar: "SB", rating: 5, tier: "Extended", date: "2026-05-20", text: "Project Rain is insane. The auto-parry and movement features are next level. Extended tier is worth every penny." },
+    { id: 2, user: "FrostByte", avatar: "FB", rating: 5, tier: "Extended", date: "2026-05-16", text: "Clean execution, no lag at all. The ESP is really well tuned. Works perfectly on latest Volt." },
+    { id: 3, user: "CrimsonVex", avatar: "CV", rating: 4, tier: "Standard", date: "2026-05-12", text: "Solid script. Good value for the Standard tier. Movement features are smooth." },
   ],
-};
+};;
 
 // ── BONUS TIERS ───────────────────────────────────────────────────────────────
 const BONUS_TIERS = [
@@ -1993,11 +1994,11 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
         <div className="prod-prev-inner">
           <div className="sec-hd reveal reveal-delay-1">
             <div className="sec-eyebrow">Our Products</div>
-            <div className="sec-h2">Andromeda Script & Neptune Hub</div>
+            <div className="sec-h2">Our Scripts</div>
             <div className="sec-desc">Choose the tier that fits your playstyle. One-time payment, lifetime access.</div>
           </div>
           <div className="prod-prev-cards">
-            {[PRODUCTS[0].tiers[0], PRODUCTS[0].tiers[1], PRODUCTS[1].tiers[1]].map((t,i)=>(
+            {[PRODUCTS[0].tiers[1], PRODUCTS[1].tiers[0], PRODUCTS[1].tiers[1]].map((t,i)=>(
               <div key={t.id+i} className="gc prev-tier stagger-item"
                 style={{borderColor:`${t.color}50`,background:`linear-gradient(160deg,${t.color}10,${t.color2}06)`}}>
                 <div className="prev-tier-label" style={{color:t.color}}>{t.name}</div>
@@ -2165,7 +2166,7 @@ function FAQPage({ onGoStore, onGoTerms }) {
         { id:"d1", q:"How do I receive my script after purchase?",
           a:<p>Delivery is <strong style={{color:'var(--gp)'}}>instant</strong>. Your license key appears in your account dashboard immediately after payment is confirmed. You can also find it in your Order History. Keys are delivered directly via the in-site dashboard — no email confirmation is required.</p> },
         { id:"d2", q:"What executor do I need?",
-          a:<><p>Both <strong style={{color:'var(--gp)'}}>Andromeda Script</strong> and <strong style={{color:'var(--gp)'}}>Neptune Hub</strong> are compatible with <strong style={{color:'var(--ts)'}}>Volt</strong> (recommended) as well as other high-level executors. Make sure your executor is up to date before injecting. An outdated executor may cause the script to fail or behave unexpectedly — this is not covered by our support.</p></> },
+          a:<><p>Our scripts are compatible with <strong style={{color:'var(--ts)'}}>Volt</strong> (recommended) as well as other high-level executors. Make sure your executor is up to date before injecting. An outdated executor may cause the script to fail or behave unexpectedly — this is not covered by our support.</p></> },
         { id:"d3", q:"Can I use my key on multiple devices?",
           a:<><p>No. Each key is bound to a single hardware ID (HWID). You may not use your key on more than one device at a time. If you switch to a new computer or reformatted system, you can request an HWID reset via our Discord — we allow <strong>one free reset per 30-day rolling period</strong>. We are not responsible for unauthorized use of your key if you share your account or leave your credentials exposed.</p></> },
         { id:"d4", q:"Can I share my account or key with a friend?",
@@ -2176,7 +2177,7 @@ function FAQPage({ onGoStore, onGoTerms }) {
       title: "Safety & Detection",
       items: [
         { id:"s1", q:"Are your scripts safe to use? Will I get banned?",
-          a:<><p>Both Andromeda Script and Neptune Hub include built-in <strong style={{color:'var(--gp)'}}>Anti-Detection engines</strong> with server-side spoofing, a humanizer, and randomized timing. Our detection rate for Andromeda Script is currently <strong style={{color:'#10B981'}}>0 confirmed bans</strong>. However, <strong>no cheat is 100% undetectable</strong> — this is not possible and we make no such claim. Use at your own risk and stay updated with the latest script version.</p><p>Andromeda is not responsible for any bans or suspensions issued by Roblox Corporation, any game developer, or any third-party platform.</p></> },
+          a:<><p>Our scripts include built-in <strong style={{color:'var(--gp)'}}>Anti-Detection engines</strong> with server-side spoofing, a humanizer, and randomized timing. Our detection rate for Andromeda Script is currently <strong style={{color:'#10B981'}}>0 confirmed bans</strong>. However, <strong>no cheat is 100% undetectable</strong> — this is not possible and we make no such claim. Use at your own risk and stay updated with the latest script version.</p><p>Andromeda is not responsible for any bans or suspensions issued by Roblox Corporation, any game developer, or any third-party platform.</p></> },
         { id:"s2", q:"How quickly do you patch after a game update?",
           a:<p>Our teams monitor game patches 24/7 across supported titles. Critical updates that break functionality are typically patched within <strong style={{color:'var(--gp)'}}>2–6 hours</strong>. Status updates are posted in our Discord. We do not guarantee a specific patch time and are not liable for downtime caused by third-party game updates.</p> },
         { id:"s3", q:"Does this violate Roblox's Terms of Service?",
@@ -2187,7 +2188,7 @@ function FAQPage({ onGoStore, onGoTerms }) {
       title: "Technical Support",
       items: [
         { id:"t1", q:"A script isn't working — what do I do?",
-          a:<><p>First, verify that your executor is fully updated and that Roblox is not running in the background. Re-inject after a fresh game launch. If the issue persists, open a support ticket in our Discord with: your executor name and version, the product (Andromeda Script or Neptune Hub), the game you are running it on, and a description of the error or unexpected behavior. Generic "it's not working" messages without details cannot be resolved.</p><p>Please note: we cannot assist with issues caused by outdated executors, unofficial/modified versions of our scripts, or hardware configurations outside of standard consumer setups.</p></> },
+          a:<><p>First, verify that your executor is fully updated and that Roblox is not running in the background. Re-inject after a fresh game launch. If the issue persists, open a support ticket in our Discord with: your executor name and version, the specific product you're using, the game you are running it on, and a description of the error or unexpected behavior. Generic "it's not working" messages without details cannot be resolved.</p><p>Please note: we cannot assist with issues caused by outdated executors, unofficial/modified versions of our scripts, or hardware configurations outside of standard consumer setups.</p></> },
         { id:"t2", q:"How do I contact support?",
           a:<p>The only official support channel is our <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>Discord server</strong>. Average response time is under 2 hours. We do not respond to support requests sent via social media, third-party websites, or any channel other than our official Discord. For order issues, always reference your Order ID.</p> },
         { id:"t3", q:"Where can I read the full Terms of Service?",
@@ -2320,7 +2321,7 @@ function TermsPage({ onBack }) {
         },
         {
           h:"2. Nature of Products — Digital Goods",
-          body:<><p>All products sold by Andromeda are <strong style={{color:'var(--gp)'}}>digital goods</strong> delivered in the form of software license keys and/or access credentials. These goods are described in full on the product pages at the time of purchase.</p><p>By purchasing any digital product from Andromeda, you acknowledge and agree that:</p><ul><li>Digital goods, by their nature, are <strong>immediately delivered upon confirmation of payment</strong> and are <strong>not returnable</strong> once a license key has been issued or access has been granted.</li><li>The issuance of a license key constitutes the full delivery of the product. After a key is issued, the sale is final and non-refundable under all circumstances, including but not limited to: dissatisfaction with the product's features, changes in personal circumstances, change of mind, or inability to use the product due to external factors (e.g., executor incompatibility, game patches).</li><li>A delivered and activated license key can no longer be considered "new" or "resalable" and therefore has no残余 value. We are under no obligation to repurchase, refund, or exchange a delivered key.</li></ul><p>In the event of an unresolved technical failure (i.e., the product is completely non-functional and we are unable to resolve it within 72 hours of you contacting support with full diagnostic details), we may, at our <strong>sole and absolute discretion</strong>, offer a replacement key or account credit. This is not a guarantee and does not constitute an admission of liability.</p></>
+          body:<><p>All products sold by Andromeda are <strong style={{color:'var(--gp)'}}>digital goods</strong> delivered in the form of software license keys and/or access credentials. These goods are described in full on the product pages at the time of purchase.</p><p>By purchasing any digital product from Andromeda, you acknowledge and agree that:</p><ul><li>Digital goods, by their nature, are <strong>immediately delivered upon confirmation of payment</strong> and are <strong>not returnable</strong> once a license key has been issued or access has been granted.</li><li>The issuance of a license key constitutes the full delivery of the product. After a key is issued, the sale is final and non-refundable under all circumstances, including but not limited to: dissatisfaction with the product's features, changes in personal circumstances, change of mind, or inability to use the product due to external factors (e.g., executor incompatibility, game patches).</li><li>A delivered and activated license key can no longer be considered "new" or "resalable" and therefore has nozero value. We are under no obligation to repurchase, refund, or exchange a delivered key.</li></ul><p>In the event of an unresolved technical failure (i.e., the product is completely non-functional and we are unable to resolve it within 72 hours of you contacting support with full diagnostic details), we may, at our <strong>sole and absolute discretion</strong>, offer a replacement key or account credit. This is not a guarantee and does not constitute an admission of liability.</p></>
         },
         {
           h:"3. License & Permitted Use",
@@ -2627,7 +2628,10 @@ export default function App() {
               <div key={p.id} className="gc pcard" onClick={()=>{setSelProduct(p);setPage("product");}}>
                 {/* Card image area with logo */}
                 <div className="pcard-img">
-                  <LogoSVG size={150} glow />
+                  {p.id === 2
+                    ? <img src="/project-rain.png" alt={p.name} style={{width:150,height:150,objectFit:'contain',borderRadius:8}} />
+                    : <LogoSVG size={150} glow />
+                  }
                   <div className="pcard-name-wrap">
                     <div className="pcard-subtitle">{p.subtitle}</div>
                     <div className="pcard-name">{p.name}</div>

@@ -191,7 +191,7 @@ const injectCSS = () => {
         radial-gradient(ellipse 60% 40% at 50% 50%,rgba(236,72,153,.05) 0%,transparent 65%);}
 
     /* Floating blob nebulas */
-    .blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+    .blob{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none;}
     .blob-1{width:600px;height:600px;
       background:radial-gradient(circle,rgba(139,92,246,.15),transparent 70%);
       top:-200px;left:-200px;
@@ -298,8 +298,8 @@ const injectCSS = () => {
     }
 
     /* GLASS */
-    .gc{background:linear-gradient(135deg,rgba(139,92,246,.08) 0%,rgba(6,182,212,.05) 100%);
-      backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);
+    .gc{background:linear-gradient(135deg,rgba(139,92,246,.12) 0%,rgba(6,182,212,.08) 100%);
+      border:1px solid rgba(139,92,246,.15);
       border:1px solid rgba(255,255,255,.11);border-radius:16px;
       transition:border-color .3s cubic-bezier(0.16,1,0.3,1),transform .3s cubic-bezier(0.16,1,0.3,1),
         box-shadow .3s cubic-bezier(0.16,1,0.3,1);
@@ -473,9 +473,9 @@ const injectCSS = () => {
     .rtxt:focus{border-color:var(--gp);}
 
     /* CART */
-    .cart-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:200;animation:fIn .2s ease;}
+    .cart-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;animation:fIn .2s ease;}
     .cart-pn{position:fixed;right:0;top:0;bottom:0;width:380px;max-width:100vw;
-      background:rgba(7,7,26,.96);backdrop-filter:blur(30px);border-left:1px solid var(--gb);
+      background:rgba(7,7,26,.97);border-left:1px solid var(--gb);
       display:flex;flex-direction:column;z-index:201;animation:sIn .3s ease;}
     @keyframes sIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
     @keyframes fIn{from{opacity:0}to{opacity:1}}
@@ -504,7 +504,7 @@ const injectCSS = () => {
     .cl-btn:hover{color:var(--tp);}
 
     /* AUTH MODAL */
-    .mo{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);z-index:300;
+    .mo{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;
       display:flex;align-items:center;justify-content:center;padding:20px;animation:fIn .25s ease;}
     .mb{background:rgba(7,7,26,.97);border:1px solid rgba(139,92,246,.3);border-radius:20px;padding:32px;
       width:100%;max-width:400px;backdrop-filter:blur(30px);
@@ -729,7 +729,7 @@ const injectCSS = () => {
 
     /* ── COOKIE BANNER ── */
     .cookie-bar{position:fixed;bottom:0;left:0;right:0;z-index:999;
-      background:rgba(7,7,26,.92);backdrop-filter:blur(20px);
+      background:rgba(7,7,26,.92);
       border-top:1px solid var(--gb);padding:14px 24px;
       display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
     .cookie-text{font-size:13px;color:var(--ts);flex:1;min-width:200px;}
@@ -779,40 +779,36 @@ const injectCSS = () => {
       .fade-up{opacity:0;animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;}
       @keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-      /* ── TWINKLE: scroll-triggered reveal with glow ── */
-      /* Base state: invisible + no glow */
-      .twinkle{opacity:0;filter:blur(2px) brightness(0.3);transform:scale(0.94);
-        transition:opacity 1s cubic-bezier(0.25,0.46,0.45,0.94),
-                   filter 1s cubic-bezier(0.25,0.46,0.45,0.94),
-                   transform 1s cubic-bezier(0.25,0.46,0.45,0.94);}
-      /* Activated: full glow + sharp */
-      .twinkle.in-view{opacity:1;filter:blur(0px) brightness(1);transform:scale(1);}
-      .twinkle-delay-1{transition-delay:.1s;}
-      .twinkle-delay-2{transition-delay:.22s;}
-      .twinkle-delay-3{transition-delay:.35s;}
-      .twinkle-delay-4{transition-delay:.48s;}
-      .twinkle-delay-5{transition-delay:.62s;}
-      .twinkle-delay-6{transition-delay:.76s;}
-      .twinkle-delay-7{transition-delay:.90s;}
-      .twinkle-delay-8{transition-delay:1.05s;}
+      /* ── TWINKLE: scroll-triggered reveal — GPU-friendly (opacity + translateY only) ── */
+      .twinkle{opacity:0;transform:translateY(20px);
+        transition:opacity .8s cubic-bezier(0.25,0.46,0.45,0.94),
+                   transform .8s cubic-bezier(0.25,0.46,0.45,0.94);
+        will-change:opacity,transform;}
+      .twinkle.in-view{opacity:1;transform:translateY(0);}
+      .twinkle-delay-1{transition-delay:.12s;}
+      .twinkle-delay-2{transition-delay:.24s;}
+      .twinkle-delay-3{transition-delay:.38s;}
+      .twinkle-delay-4{transition-delay:.52s;}
+      .twinkle-delay-5{transition-delay:.66s;}
+      .twinkle-delay-6{transition-delay:.80s;}
 
-      /* Sub-items inside a twinkle group: staggered cascade */
-      .twinkle-group .twinkle-child{opacity:0;filter:blur(2px) brightness(0.3);transform:scale(0.94) translateY(10px);
-        transition:opacity 1s cubic-bezier(0.25,0.46,0.45,0.94),
-                   filter 1s cubic-bezier(0.25,0.46,0.45,0.94),
-                   transform 1s cubic-bezier(0.25,0.46,0.45,0.94);}
-      .twinkle-group.in-view .twinkle-child{opacity:1;filter:blur(0px) brightness(1);transform:scale(1) translateY(0);}
+      /* Sub-items: staggered cascade — only opacity + translateY */
+      .twinkle-group .twinkle-child{opacity:0;transform:translateY(14px);
+        transition:opacity .7s cubic-bezier(0.25,0.46,0.45,0.94),
+                   transform .7s cubic-bezier(0.25,0.46,0.45,0.94);
+        will-change:opacity,transform;}
+      .twinkle-group.in-view .twinkle-child{opacity:1;transform:translateY(0);}
       .twinkle-group.in-view .twinkle-child:nth-child(1){transition-delay:.0s;}
-      .twinkle-group.in-view .twinkle-child:nth-child(2){transition-delay:.08s;}
-      .twinkle-group.in-view .twinkle-child:nth-child(3){transition-delay:.16s;}
-      .twinkle-group.in-view .twinkle-child:nth-child(4){transition-delay:.24s;}
-      .twinkle-group.in-view .twinkle-child:nth-child(5){transition-delay:.32s;}
-      .twinkle-group.in-view .twinkle-child:nth-child(6){transition-delay:.40s;}
-      .twinkle-group.in-view .twinkle-child:nth-child(7){transition-delay:.48s;}
-      .twinkle-group.in-view .twinkle-child:nth-child(8){transition-delay:.56s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(2){transition-delay:.09s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(3){transition-delay:.18s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(4){transition-delay:.27s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(5){transition-delay:.36s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(6){transition-delay:.45s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(7){transition-delay:.54s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(8){transition-delay:.63s;}
 
-      /* Above-the-fold: hero elements start visible — no scroll trigger needed */
-      .hero-instant{opacity:1;filter:blur(0) brightness(1);transform:scale(1);}
+      /* Above-the-fold: hero elements start visible */
+      .hero-instant{opacity:1;transform:translateY(0);}
 
       /* Scroll-triggered reveal (legacy — kept for compatibility) */
       .reveal{opacity:0;transform:translateY(18px);
@@ -840,9 +836,9 @@ const injectCSS = () => {
 
       /* Liquid Glass Effect */
       .liquid-glass{
-        background:linear-gradient(135deg,rgba(139,92,246,0.1) 0%,rgba(6,182,212,0.08) 50%,rgba(139,92,246,0.05) 100%);
-        backdrop-filter:blur(20px) saturate(180%);
-        border:1px solid rgba(139,92,246,0.2);
+        background:linear-gradient(135deg,rgba(139,92,246,0.14) 0%,rgba(6,182,212,0.1) 50%,rgba(139,92,246,0.07) 100%);
+        border:1px solid rgba(139,92,246,0.22);
+        backdrop-filter:none;
         box-shadow:0 8px 32px rgba(139,92,246,0.15),inset 0 1px 0 rgba(255,255,255,0.1),0 0 0 1px rgba(139,92,246,0.1);
       }
 
@@ -852,7 +848,7 @@ const injectCSS = () => {
         content:'';position:absolute;inset:-2px;border-radius:inherit;
         background:linear-gradient(45deg,#8B5CF6,#06B6D4,#EC4899,#8B5CF6);
         background-size:300% 300%;animation:neonGradient 4s ease infinite;
-        z-index:-1;filter:blur(8px);opacity:0.6;
+        z-index:-1;opacity:0.15;
       }
       @keyframes neonGradient{
         0%,100%{background-position:0% 50%}
@@ -931,7 +927,7 @@ const injectCSS = () => {
       @keyframes sePulse{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.15);filter:brightness(1.3)}}
       @keyframes seGlow{0%{filter:drop-shadow(0 0 5px #8B5CF6)}100%{filter:drop-shadow(0 0 20px #06B6D4) drop-shadow(0 0 30px #8B5CF6)}}
       @keyframes seOrbit{0%{transform:rotate(0deg) translateX(10px) rotate(0deg)}100%{transform:rotate(360deg) translateX(10px) rotate(-360deg)}}
-      @keyframes seNebula{0%,100%{filter:hue-rotate(0deg) brightness(1)}50%{filter:hue-rotate(30deg) brightness(1.2)}}
+      @keyframes seNebula{0%,100%{opacity:1}50%{opacity:.7}}
 
       /* How It Works */
       .hiw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:900px;margin:0 auto;}

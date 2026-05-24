@@ -2175,12 +2175,10 @@ function FAQPage({ onGoStore, onGoTerms }) {
     {
       title: "Products",
       items: [
-        { id:"pr1", q:"What scripts do you offer?",
-          a:<><p>Currently we offer two products:</p><ul><li><strong style={{color:'var(--gp)'}}>Andromeda Script</strong> — our flagship Deepwoken script with combat, movement, visuals, and automation. Priced at $10 (Premium) or $15 (Rewrite).</li><li><strong style={{color:'var(--gp)'}}>Neptune Hub</strong> — a universal multi-game hub supporting multiple Roblox titles. Priced at $8 (Standard) or $12 (Pro).</li></ul><p style={{marginTop:10}}>All purchases are one-time payments with lifetime access and updates.</p></> },
-        { id:"pr2", q:"What's the difference between Neptune Hub tiers?",
-          a:<><p><strong style={{color:'var(--gp)'}}>Standard</strong> gives you access to 5+ supported games with core combat and visual features.</p><p style={{marginTop:8}}><strong style={{color:'var(--gp)'}}>Pro</strong> unlocks all supported games, includes the Anti-Detection engine, priority support, and early access to patches.</p></> },
-        { id:"pr3", q:"Can I buy both scripts?",
-          a:<p>Yes! Each product is sold separately. You can purchase Andromeda Script for Deepwoken and Neptune Hub for multi-game functionality independently. Use a promo code like <strong style={{color:'var(--gp)'}}>NOVA5</strong> or <strong style={{color:'var(--gp)'}}>STAR10</strong> for bonus perks as you spend more.</p> },
+        { id:"pr1", q:"What products do you offer?",
+          a:<><p>Andromeda offers a curated selection of premium scripts and digital tools. Every product we carry is handpicked and thoroughly tested before being listed — we only work with products we trust and can fully stand behind. All purchases come with one-time payment and lifetime access.</p><p style={{marginTop:8}}>Browse the full catalog in our <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>Discord ↗</strong> or visit the Store to see what's available.</p></> },
+        { id:"pr2", q:"Are your products safe and reliable?",
+          a:<p>Yes. Every product we offer goes through testing before it's listed. We prioritize quality over quantity — if a product doesn't meet our standards, it doesn't make the cut. We also monitor for game updates and push patches quickly to keep everything working as intended.</p> },
       ]
     },
     {
@@ -2215,7 +2213,7 @@ function FAQPage({ onGoStore, onGoTerms }) {
       title: "Safety & Detection",
       items: [
         { id:"s1", q:"Are your scripts safe to use? Will I get banned?",
-          a:<><p>Our scripts include built-in <strong style={{color:'var(--gp)'}}>Anti-Detection engines</strong> with server-side spoofing, a humanizer, and randomized timing. Our detection rate for Andromeda Script is currently <strong style={{color:'#10B981'}}>0 confirmed bans</strong>. However, <strong>no cheat is 100% undetectable</strong> — this is not possible and we make no such claim. Use at your own risk and stay updated with the latest script version.</p><p>Andromeda is not responsible for any bans or suspensions issued by Roblox Corporation, any game developer, or any third-party platform.</p></> },
+          a:<><p>Our scripts include built-in <strong style={{color:'var(--gp)'}}>Anti-Detection engines</strong> with server-side spoofing, a humanizer, and randomized timing. across our entire product lineup <strong style={{color:'#10B981'}}>0 confirmed bans</strong>. However, <strong>no cheat is 100% undetectable</strong> — this is not possible and we make no such claim. Use at your own risk and stay updated with the latest script version.</p><p>Andromeda is not responsible for any bans or suspensions issued by Roblox Corporation, any game developer, or any third-party platform.</p></> },
         { id:"s2", q:"How quickly do you patch after a game update?",
           a:<p>Our teams monitor game patches 24/7 across supported titles. Critical updates that break functionality are typically patched within <strong style={{color:'var(--gp)'}}>2–6 hours</strong>. Status updates are posted in our Discord. We do not guarantee a specific patch time and are not liable for downtime caused by third-party game updates.</p> },
         { id:"s3", q:"Does this violate Roblox's Terms of Service?",

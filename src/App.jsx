@@ -779,13 +779,48 @@ const injectCSS = () => {
       .fade-up{opacity:0;animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;}
       @keyframes fadeUp{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-      /* Scroll-triggered reveal */
-      .reveal{opacity:0;transform:translateY(32px);
-        transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1);}
+      /* ── TWINKLE: scroll-triggered reveal with glow ── */
+      /* Base state: invisible + no glow */
+      .twinkle{opacity:0;filter:blur(2px) brightness(0.3);transform:scale(0.94);
+        transition:opacity 1s cubic-bezier(0.25,0.46,0.45,0.94),
+                   filter 1s cubic-bezier(0.25,0.46,0.45,0.94),
+                   transform 1s cubic-bezier(0.25,0.46,0.45,0.94);}
+      /* Activated: full glow + sharp */
+      .twinkle.in-view{opacity:1;filter:blur(0px) brightness(1);transform:scale(1);}
+      .twinkle-delay-1{transition-delay:.1s;}
+      .twinkle-delay-2{transition-delay:.22s;}
+      .twinkle-delay-3{transition-delay:.35s;}
+      .twinkle-delay-4{transition-delay:.48s;}
+      .twinkle-delay-5{transition-delay:.62s;}
+      .twinkle-delay-6{transition-delay:.76s;}
+      .twinkle-delay-7{transition-delay:.90s;}
+      .twinkle-delay-8{transition-delay:1.05s;}
+
+      /* Sub-items inside a twinkle group: staggered cascade */
+      .twinkle-group .twinkle-child{opacity:0;filter:blur(2px) brightness(0.3);transform:scale(0.94) translateY(10px);
+        transition:opacity 1s cubic-bezier(0.25,0.46,0.45,0.94),
+                   filter 1s cubic-bezier(0.25,0.46,0.45,0.94),
+                   transform 1s cubic-bezier(0.25,0.46,0.45,0.94);}
+      .twinkle-group.in-view .twinkle-child{opacity:1;filter:blur(0px) brightness(1);transform:scale(1) translateY(0);}
+      .twinkle-group.in-view .twinkle-child:nth-child(1){transition-delay:.0s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(2){transition-delay:.08s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(3){transition-delay:.16s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(4){transition-delay:.24s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(5){transition-delay:.32s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(6){transition-delay:.40s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(7){transition-delay:.48s;}
+      .twinkle-group.in-view .twinkle-child:nth-child(8){transition-delay:.56s;}
+
+      /* Above-the-fold: hero elements start visible — no scroll trigger needed */
+      .hero-instant{opacity:1;filter:blur(0) brightness(1);transform:scale(1);}
+
+      /* Scroll-triggered reveal (legacy — kept for compatibility) */
+      .reveal{opacity:0;transform:translateY(18px);
+        transition:opacity 1.1s cubic-bezier(0.25,0.46,0.45,0.94),transform 1.1s cubic-bezier(0.25,0.46,0.45,0.94);}
       .reveal.in-view{opacity:1;transform:translateY(0);}
-      .reveal-delay-1{transition-delay:.1s;}
-      .reveal-delay-2{transition-delay:.2s;}
-      .reveal-delay-3{transition-delay:.3s;}
+      .reveal-delay-1{transition-delay:.12s;}
+      .reveal-delay-2{transition-delay:.25s;}
+      .reveal-delay-3{transition-delay:.4s;}
 
       /* Promo modal */
       .promo-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:flex;align-items:center;justify-content:center;}
@@ -1943,29 +1978,29 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </section>
 
       {/* STATS */}
-      <div className="stats-bar reveal">
-        <div className="stats-inline reveal reveal-delay-1">
+      <div className="stats-bar twinkle-group">
+        <div className="stats-inline twinkle-child">
           <Icon name="users" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">2,400+</div>
             <div className="stats-inline-lbl">Happy Customers</div>
           </div>
         </div>
-        <div className="stats-inline reveal reveal-delay-1">
+        <div className="stats-inline twinkle-child">
           <Icon name="chart" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">99.2%</div>
             <div className="stats-inline-lbl">Uptime</div>
           </div>
         </div>
-        <div className="stats-inline reveal reveal-delay-2">
+        <div className="stats-inline twinkle-child">
           <Icon name="clock" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">&lt; 2h</div>
             <div className="stats-inline-lbl">Support Response</div>
           </div>
         </div>
-        <div className="stats-inline reveal reveal-delay-2">
+        <div className="stats-inline twinkle-child">
           <Icon name="shield" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">0</div>
@@ -1975,15 +2010,15 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </div>
 
       {/* FEATURES */}
-      <section className="sec reveal">
-        <div className="sec-hd reveal reveal-delay-1">
+      <section className="sec twinkle">
+        <div className="sec-hd twinkle">
           <div className="sec-eyebrow">Why Andromeda</div>
           <div className="sec-h2">Built different. Built better.</div>
           <div className="sec-desc">Every feature exists for a reason. No bloat, no filler — just tools that give you a real edge.</div>
         </div>
-        <div className="feat-cards">
+        <div className="feat-cards twinkle-group">
           {feats.map(f=>(
-            <div key={f.title} className="gc feat-card stagger-item">
+            <div key={f.title} className="gc feat-card twinkle-child">
               <div className="feat-card-icon"><Icon name={f.icon} size={28} /></div>
               <div className="feat-card-title">{f.title}</div>
               <div className="feat-card-desc">{f.desc}</div>
@@ -1993,16 +2028,16 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </section>
 
       {/* PRODUCT PREVIEW */}
-      <section className="prod-prev reveal">
+      <section className="prod-prev twinkle">
         <div className="prod-prev-inner">
-          <div className="sec-hd reveal reveal-delay-1">
+          <div className="sec-hd twinkle">
             <div className="sec-eyebrow">Our Products</div>
             <div className="sec-h2">Our Scripts</div>
             <div className="sec-desc">Choose the tier that fits your playstyle. One-time payment, lifetime access.</div>
           </div>
-          <div className="prod-prev-cards">
+          <div className="prod-prev-cards twinkle-group">
             {[PRODUCTS[0].tiers[0], PRODUCTS[0].tiers[1]].map((t,i)=>(
-              <div key={t.id+i} className="gc prev-tier stagger-item"
+              <div key={t.id+i} className="gc prev-tier twinkle-child"
                 style={{borderColor:`${t.color}50`,background:`linear-gradient(160deg,${t.color}10,${t.color2}06)`}}>
                 <div className="prev-tier-label" style={{color:t.color}}>{t.name}</div>
                 <div className="prev-tier-price" style={{
@@ -2023,29 +2058,29 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="sec reveal">
-        <div className="sec-hd reveal reveal-delay-1">
+      <section className="sec twinkle">
+        <div className="sec-hd twinkle">
           <div className="sec-eyebrow">Simple Process</div>
           <div className="sec-h2">How It Works</div>
           <div className="sec-desc">Get started in 4 easy steps</div>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:24,maxWidth:900,margin:'0 auto'}}>
-          <div className="reveal reveal-delay-1" style={{textAlign:'center',padding:20}}>
+        <div className="twinkle-group" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:24,maxWidth:900,margin:'0 auto'}}>
+          <div className="twinkle-child" style={{textAlign:'center',padding:20}}>
             <div style={{width:48,height:48,borderRadius:'50%',background:'linear-gradient(135deg,#8B5CF6,#06B6D4)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 16px',fontFamily:"'Orbitron',monospace",fontWeight:700,fontSize:20,color:'#fff'}}>1</div>
             <div style={{fontWeight:600,fontSize:15,color:'var(--ts)',marginBottom:8}}>Choose Your Plan</div>
             <div style={{fontSize:13,color:'var(--tm)',lineHeight:1.6}}>Browse our store and pick the tier that fits your needs</div>
           </div>
-          <div className="reveal reveal-delay-2" style={{textAlign:'center',padding:20}}>
+          <div className="twinkle-child" style={{textAlign:'center',padding:20}}>
             <div style={{width:48,height:48,borderRadius:'50%',background:'linear-gradient(135deg,#06B6D4,#8B5CF6)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 16px',fontFamily:"'Orbitron',monospace",fontWeight:700,fontSize:20,color:'#fff'}}>2</div>
             <div style={{fontWeight:600,fontSize:15,color:'var(--ts)',marginBottom:8}}>Secure Payment</div>
             <div style={{fontSize:13,color:'var(--tm)',lineHeight:1.6}}>Pay safely with crypto, card, or PayPal</div>
           </div>
-          <div className="reveal reveal-delay-2" style={{textAlign:'center',padding:20}}>
+          <div className="twinkle-child" style={{textAlign:'center',padding:20}}>
             <div style={{width:48,height:48,borderRadius:'50%',background:'linear-gradient(135deg,#8B5CF6,#EC4899)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 16px',fontFamily:"'Orbitron',monospace",fontWeight:700,fontSize:20,color:'#fff'}}>3</div>
             <div style={{fontWeight:600,fontSize:15,color:'var(--ts)',marginBottom:8}}>Instant Access</div>
             <div style={{fontSize:13,color:'var(--tm)',lineHeight:1.6}}>Receive your license key immediately via chat</div>
           </div>
-          <div className="reveal reveal-delay-3" style={{textAlign:'center',padding:20}}>
+          <div className="twinkle-child" style={{textAlign:'center',padding:20}}>
             <div style={{width:48,height:48,borderRadius:'50%',background:'linear-gradient(135deg,#EC4899,#F59E0B)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 16px',fontFamily:"'Orbitron',monospace",fontWeight:700,fontSize:20,color:'#fff'}}>4</div>
             <div style={{fontWeight:600,fontSize:15,color:'var(--ts)',marginBottom:8}}>Launch & Dominate</div>
             <div style={{fontSize:13,color:'var(--tm)',lineHeight:1.6}}>Use your key and dominate the competition</div>
@@ -2054,28 +2089,28 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </section>
 
       {/* GUARANTEES */}
-      <section className="sec reveal">
-        <div className="sec-hd reveal reveal-delay-1">
+      <section className="sec twinkle">
+        <div className="sec-hd twinkle">
           <div className="sec-eyebrow">Our Promise</div>
           <div className="sec-h2">Security & Guarantees</div>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:16,maxWidth:900,margin:'0 auto'}}>
-          <div className="gc reveal reveal-delay-1" style={{textAlign:'center',padding:'20px 16px'}}>
+        <div className="twinkle-group" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:16,maxWidth:900,margin:'0 auto'}}>
+          <div className="gc twinkle-child" style={{textAlign:'center',padding:'20px 16px'}}>
             <Icon name="shield" size={28} style={{color:'var(--gp)'}} />
             <div style={{fontWeight:600,fontSize:14,color:'var(--ts)',marginBottom:6}}>Zero Bans</div>
             <div style={{fontSize:12,color:'var(--tm)',lineHeight:1.5}}>0 reported bans in 2+ years of service</div>
           </div>
-          <div className="gc reveal reveal-delay-1" style={{textAlign:'center',padding:'20px 16px'}}>
+          <div className="gc twinkle-child" style={{textAlign:'center',padding:'20px 16px'}}>
             <Icon name="zap" size={28} style={{color:'var(--gp)'}} />
             <div style={{fontWeight:600,fontSize:14,color:'var(--ts)',marginBottom:6}}>Instant Patches</div>
             <div style={{fontSize:12,color:'var(--tm)',lineHeight:1.5}}>We patch within hours of game updates</div>
           </div>
-          <div className="gc reveal reveal-delay-2" style={{textAlign:'center',padding:'20px 16px'}}>
+          <div className="gc twinkle-child" style={{textAlign:'center',padding:'20px 16px'}}>
             <Icon name="lock" size={28} style={{color:'var(--gp)'}} />
             <div style={{fontWeight:600,fontSize:14,color:'var(--ts)',marginBottom:6}}>Encrypted Payments</div>
             <div style={{fontSize:12,color:'var(--tm)',lineHeight:1.5}}>All transactions processed securely</div>
           </div>
-          <div className="gc reveal reveal-delay-2" style={{textAlign:'center',padding:'20px 16px'}}>
+          <div className="gc twinkle-child" style={{textAlign:'center',padding:'20px 16px'}}>
             <Icon name="message" size={28} style={{color:'var(--gp)'}} />
             <div style={{fontWeight:600,fontSize:14,color:'var(--ts)',marginBottom:6}}>24/7 Support</div>
             <div style={{fontSize:12,color:'var(--tm)',lineHeight:1.5}}>Average response under 2 hours</div>
@@ -2084,8 +2119,8 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </section>
 
       {/* ABOUT / MISSION */}
-      <section className="sec reveal" style={{background:'linear-gradient(180deg,rgba(139,92,246,.05),transparent)'}}>
-        <div className="about-content reveal">
+      <section className="sec twinkle" style={{background:'linear-gradient(180deg,rgba(139,92,246,.05),transparent)'}}>
+        <div className="about-content twinkle">
           <Icon name="galaxy" size={48} style={{color:'var(--gp)'}} />
           <h2 style={{fontFamily:"'Orbitron',monospace",fontSize:28,marginBottom:16,
             background:'linear-gradient(135deg,#8B5CF6,#06B6D4)',
@@ -2101,7 +2136,7 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </section>
 
       {/* CTA BOTTOM */}
-      <section className="cta-bottom reveal">
+      <section className="cta-bottom twinkle">
         <h2>Ready to ascend?</h2>
         <p>Join thousands of players already using Andromeda to dominate Deepwoken.</p>
         <div style={{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap'}}>
@@ -2204,17 +2239,18 @@ function FAQPage({ onGoStore, onGoTerms }) {
 
   return (
     <div className="faq-pg">
-      <div className="faq-hero reveal">
+      <div className="faq-hero twinkle">
         <h1>Frequently Asked Questions</h1>
         <p>Everything you need to know before launching. Can't find your answer?<br/>
           <span style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>Join our Discord ↗</span>
         </p>
       </div>
       {groups.map((g,gi)=>(
-        <div key={g.title} className={`faq-group reveal ${gi>0?'reveal-delay-'+(gi):''}`}>
+        <div key={g.title} className={`faq-group twinkle ${gi>0?'twinkle-delay-2':''}`}>
           <div className="faq-group-title">{g.title}</div>
+          <div className="twinkle-group">
           {g.items.map(item=>(
-            <div key={item.id} className="faq-item stagger-item">
+            <div key={item.id} className="faq-item twinkle-child">
               <div className="faq-q" onClick={()=>toggle(item.id)}>
                 <span className="faq-q-text">{item.q}</span>
                 <span className={`faq-arrow ${open===item.id?'open':''}`}>▼</span>
@@ -2224,6 +2260,7 @@ function FAQPage({ onGoStore, onGoTerms }) {
               </div>
             </div>
           ))}
+          </div>
         </div>
       ))}
 
@@ -2237,70 +2274,35 @@ function FAQPage({ onGoStore, onGoTerms }) {
 
 // ── PRIVACY POLICY ────────────────────────────────────────────────────────────
 function PrivacyPage({ onBack }) {
+  const sections = [
+    { h:"1. Information We Collect", body:<p>When you use Andromeda, we may collect: account info (email, name, Discord username), purchase history (product, tier, order ID), HWID bound to your license, usage data (browser, OS, pages), and communication data from our Discord. We do not collect financial data — payments go through Stripe and crypto providers.</p> },
+    { h:"2. How We Use Your Information", body:<p>We use your data to: create and maintain accounts, deliver license keys, process purchases, provide Discord support, detect fraud, and improve our service. We do not use data for advertising or marketing profiling.</p> },
+    { h:"3. Data Sharing", body:<p>We do not sell or trade your personal information. Data is shared only with payment providers (Stripe, crypto networks), hosting providers for operating the Service, and law enforcement if required by applicable law.</p> },
+    { h:"4. Data Retention", body:<p>We retain data while your account is active. Deletion requests are processed within <strong>30 days</strong>. Transaction and license records may be retained longer to prevent fraud, and certain records for up to 3 years for legal compliance.</p> },
+    { h:"5. Cookies & Tracking", body:<p>Our site uses essential cookies (session, auth, cart) and optional analytics cookies (anonymous usage data). You can manage or disable cookies in your browser.</p> },
+    { h:"6. Your Rights", body:<p>You can request access to your data, correction of inaccurate data, and deletion of your account. Contact us via Discord — we respond within 7 business days and may verify your identity.</p> },
+    { h:"7. Data Security", body:<p>We protect your data with encryption in transit (HTTPS/TLS), secure hosting, and database access controls. No internet transmission is 100% secure — keep your credentials private.</p> },
+    { h:"8. Third-Party Services", body:<p>We integrate with Stripe (payments), MongoDB Atlas (database), and Discord (support). Each has their own privacy policy — we encourage you to review them.</p> },
+    { h:"9. Children's Privacy", body:<p>Andromeda is not directed at individuals under 18. We do not knowingly collect data from minors — if discovered, it will be deleted promptly.</p> },
+    { h:"10. Changes to This Policy", body:<p>We may update this policy periodically. Changes will be posted with an updated date.</p> },
+    { h:"11. Contact", body:<p>Privacy questions? Reach us on Discord: <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>discord.gg/9MK2Zepabc</strong></p> },
+  ];
   return (
     <div className="terms-pg">
-      <div className="terms-hero">
+      <div className="terms-hero twinkle">
         <h1>Privacy Policy</h1>
-        <p>Last updated: May 23, 2026 · Andromeda respects your privacy. This policy describes what data we collect and how we use it.</p>
+        <p>Last updated: May 24, 2026 · Andromeda respects your privacy.</p>
       </div>
-
-      {[
-        {
-          h:"1. Information We Collect",
-          body:<><p>When you use Andromeda, we may collect the following information:</p><ul><li><strong>Account information</strong> — email address and any information you provide during registration (name, Discord username, etc.).</li><li><strong>Purchase history</strong> — product names, tier, purchase date, order ID, and payment confirmation details.</li><li><strong>Hardware identifier (HWID)</strong> — associated with your license key for security and key management purposes.</li><li><strong>Usage data</strong> — browser type, operating system, pages visited, and general interaction patterns on our website (collected via cookies and server logs).</li><li><strong>Communication data</strong> — messages and tickets submitted through our Discord or contact channels.</li></ul><p>We do not collect any financial data (credit card numbers, bank account details) — all payment processing is handled by third-party providers (Stripe, cryptocurrency processors).</p></>
-        },
-        {
-          h:"2. How We Use Your Information",
-          body:<><p>We use the collected information solely for the following purposes:</p><ul><li>To create and maintain your account.</li><li>To deliver and manage your license keys.</li><li>To process purchases and send order-related communications.</li><li>To provide customer support via Discord.</li><li>To detect and prevent fraud, chargeback abuse, and Terms of Service violations.</li><li>To improve the functionality and security of the Service.</li></ul><p>We do not use your data for advertising, marketing profiling, or any purpose unrelated to the operation of Andromeda.</p></>
-        },
-        {
-          h:"3. Data Sharing",
-          body:<><p>We do not sell, rent, or trade your personal information to any third party. Your data may only be shared in the following circumstances:</p><ul><li>With our payment processing providers (Stripe, cryptocurrency networks) to complete transactions — governed by their own privacy policies.</li><li>With our hosting and infrastructure providers (Vercel, Render, MongoDB Atlas) strictly for the purpose of operating the Service.</li><li>With law enforcement or regulatory bodies if required by applicable law, court order, or legal process.</li><li>To enforce our Terms of Service, including in the event of chargebacks, fraud investigations, or account termination.</li></ul></>
-        },
-        {
-          h:"4. Data Retention",
-          body:<><p>We retain your account data for as long as your account remains active. If you request account deletion (see Section 6), we will delete your personal data within <strong>30 days</strong> of a verified request, subject to our legal obligations to retain certain records (e.g., transaction records for tax or legal compliance) for a period of up to 3 years.</p><p>License key and transaction records may be retained indefinitely for the purpose of preventing fraud, chargeback abuse, and Terms of Service violations.</p></>
-        },
-        {
-          h:"5. Cookies & Tracking",
-          body:<><p>Our website uses cookies to maintain session state, remember your preferences, and analyze site traffic. Cookies used include:</p><ul><li><strong>Essential cookies</strong> — required for the site to function (session, authentication, cart data).</li><li><strong>Analytics cookies</strong> — collect anonymous, aggregated usage data to help us understand how users interact with the site. You can decline analytics cookies via our cookie consent banner.</li></ul><p>You can manage or delete cookies through your browser settings. Disabling cookies may affect the functionality of the Service.</p></>
-        },
-        {
-          h:"6. Your Rights",
-          body:<><p>You have the right to:</p><ul><li>Request access to the personal data we hold about you.</li><li>Request correction of any inaccurate or incomplete data.</li><li>Request deletion of your account and personal data (subject to Section 4).</li><li>Opt out of non-essential analytics cookies via the cookie consent banner.</li></ul><p>To exercise any of these rights, contact us via our official Discord. We will respond within 7 business days. We reserve the right to verify your identity before processing any data-related request.</p></>
-        },
-        {
-          h:"7. Data Security",
-          body:<><p>We implement reasonable technical and organizational measures to protect your personal data from unauthorized access, alteration, disclosure, or destruction. These measures include encryption in transit (HTTPS/TLS), secure hosting infrastructure, and access controls on our databases.</p><p>No method of data transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security. You are responsible for keeping your account credentials confidential.</p></>
-        },
-        {
-          h:"8. Third-Party Services",
-          body:<><p>This Service integrates with the following third-party services, each governed by their own privacy policies:</p><ul><li><strong>Vercel</strong> — website hosting and CDN.</li><li><strong>Render</strong> — backend API hosting.</li><li><strong>MongoDB Atlas</strong> — database services.</li><li><strong>Stripe</strong> — payment processing.</li><li><strong>Google Gmail (Gmail SMTP)</strong> — transactional email delivery.</li><li><strong>Discord</strong> — customer support and community.</li></ul><p>We are not responsible for the privacy practices of these third parties. We encourage you to review their privacy policies.</p></>
-        },
-        {
-          h:"9. Children's Privacy",
-          body:<p>Andromeda is not directed at or intended for use by individuals under the age of 18. We do not knowingly collect personal data from minors. If we discover that personal data has been inadvertently collected from a minor, we will take steps to delete that data as soon as reasonably possible. Parents or guardians who believe their child has provided us with personal data should contact us immediately via Discord.</p>
-        },
-        {
-          h:"10. Changes to This Policy",
-          body:<><p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated "Last updated" date. We encourage you to review this policy periodically. Continued use of the Service after any change constitutes acceptance of the updated policy.</p></>
-        },
-        {
-          h:"11. Contact",
-          body:<p>For privacy-related questions, data access requests, or concerns, contact us exclusively through our official Discord: <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>discord.gg/9MK2Zepabc</strong>. We do not respond to privacy requests made through third-party platforms or social media.</p>
-        },
-      ].map((s,i)=>(
-        <div key={i}>
-          <div className="terms-sec">
-            <h2>{s.h}</h2>
-            {s.body}
-          </div>
-          {i < 10 && <div className="terms-divider"/>}
+      <div className="twinkle-group">
+      {sections.map((s,i)=>(
+        <div key={i} className="terms-sec twinkle-child">
+          <h2>{s.h}</h2>
+          {s.body}
+          {i < sections.length - 1 && <div className="terms-divider"/>}
         </div>
       ))}
-
-      <div style={{marginTop:40,padding:'20px 0',borderTop:'1px solid var(--gb)',
-        textAlign:'center',fontSize:13,color:'var(--tm)'}}>
+      </div>
+      <div className="twinkle" style={{marginTop:40,padding:'20px 0',borderTop:'1px solid var(--gb)',textAlign:'center',fontSize:13,color:'var(--tm)'}}>
         © 2026 Andromeda. All rights reserved.{' '}
         <span style={{color:'var(--gp)',cursor:'pointer'}} onClick={onBack}>← Back</span>
       </div>
@@ -2310,85 +2312,87 @@ function PrivacyPage({ onBack }) {
 
 // ── TERMS PAGE ────────────────────────────────────────────────────────────────
 function TermsPage({ onBack }) {
+  const sections = [
+    {
+      h:"1. Acceptance of Terms",
+      body:<><p>By accessing, browsing, or purchasing from the Andromeda website and any associated services, you confirm that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree, please stop using the Service.</p><p>We may update these Terms from time to time. Major updates will be announced on our Discord server. Continued use after an update means you accept the new terms.</p></>
+    },
+    {
+      h:"2. Nature of Products",
+      body:<><p>All products sold by Andromeda are <strong style={{color:'var(--gp)'}}>digital goods</strong> — software license keys and/or access credentials. Once a license key is issued, the sale is final and non-refundable. This is standard practice for digital products, as the key cannot be deactivated after delivery.</p><p>If a product is completely non-functional and our team cannot resolve it within 72 hours of receiving full diagnostic details, we may offer a replacement key or account credit at our discretion.</p></>
+    },
+    {
+      h:"3. License & Permitted Use",
+      body:<><p>Upon purchase, you receive a <strong>non-exclusive, non-transferable, single-user license</strong>. This means:</p><ul><li>Your key is for your account only — no sharing with others.</li><li>You may not resell, redistribute, or sublicense your key.</li><li>You may not reverse-engineer, modify, or create derivative works based on our software.</li><li>You may not use our products to harm, harass, or gain unfair advantage against other players in ways that violate applicable law or the game's own terms.</li></ul><p>If any of these conditions are violated, your license and account may be terminated.</p></>
+    },
+    {
+      h:"4. Hardware Binding & Account Security",
+      body:<><p>Each license key is bound to a single hardware identifier (HWID) at activation. This helps keep your account secure and prevents unauthorized use.</p><ul><li>Keep your account credentials and license keys private.</li><li>We allow <strong>one HWID reset per 30-day rolling period</strong> via Discord. Additional resets require proof of hardware failure.</li><li>We are not responsible for unauthorized access if your credentials or key are shared or exposed.</li><li>Sharing your key or using it on multiple devices will result in key revocation.</li></ul></>
+    },
+    {
+      h:"5. Payments & Order Processing",
+      body:<><p>All prices are in USD and subject to change. Completed orders are final — no cancellations or modifications after payment confirmation.</p><p>Payments are processed securely via Stripe and/or cryptocurrency networks. We do not store your card details.</p></>
+    },
+    {
+      h:"6. Refund Policy",
+      body:<><p>All digital product purchases are final once a license key is issued. Before purchasing, please review the product description and feature list carefully.</p><p>Refunds are not available for: change of mind, dissatisfaction after purchase, game or executor updates, in-game bans, or hardware/network issues on your end.</p><p>If you experience a genuine technical issue, contact us on Discord within <strong>48 hours</strong> of purchase with your order ID and a description of the problem.</p></>
+    },
+    {
+      h:"7. Payment Disputes",
+      body:<><p>If you have an issue with your order, please <strong>contact us first</strong> before filing any dispute with your bank or payment provider. We want to help and resolve things quickly.</p><p>If a chargeback is filed without prior contact, your account and all associated keys will be terminated and blocked from future purchases. We will provide transaction records and delivery confirmation to the payment provider to dispute the chargeback.</p></>
+    },
+    {
+      h:"8. Risk Acknowledgment",
+      body:<><p>Using third-party scripts in online games, including Roblox, may violate that game's Terms of Service. <strong>No script is or can be 100% undetectable</strong> — this is not possible by definition.</p><p>Andromeda is not responsible for bans, suspensions, or other actions taken by Roblox Corporation, game developers, or any other platform. You use our products at your own discretion.</p></>
+    },
+    {
+      h:"9. Service Availability",
+      body:<><p>We aim for high availability but do not guarantee uninterrupted access. Scheduled maintenance will be announced on Discord where possible.</p><p>We reserve the right to update, modify, or discontinue products, and to suspend accounts that violate these Terms.</p></>
+    },
+    {
+      h:"10. Intellectual Property",
+      body:<><p>All products, logos, trademarks, code, designs, and content on the Andromeda website are our intellectual property. Unauthorized reproduction, distribution, or use of our IP is prohibited.</p></>
+    },
+    {
+      h:"11. Liability",
+      body:<><p>Andromeda is not liable for any indirect, incidental, or consequential damages arising from the use of our products or services. Our total liability will not exceed the amount you paid for the specific product in question.</p></>
+    },
+    {
+      h:"12. Account Termination",
+      body:<><p>Accounts and license keys may be suspended or permanently terminated without notice if you violate these Terms, file payment disputes without prior contact, share your account or key, engage in fraud, or behave inappropriately toward our team.</p></>
+    },
+    {
+      h:"13. Governing Law",
+      body:<><p>These Terms are governed by the laws of the jurisdiction in which Andromeda operates. We ask that you contact us first to resolve any disputes before pursuing other avenues.</p></>
+    },
+    {
+      h:"14. Severability",
+      body:<p>If any part of these Terms is found invalid, the remaining terms will continue in full effect.</p>
+    },
+    {
+      h:"15. Contact",
+      body:<><p>Questions or concerns? Reach out on our Discord: <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>discord.gg/9MK2Zepabc</strong></p></>
+    },
+  ];
+
   return (
     <div className="terms-pg">
-      <div className="terms-hero">
+      <div className="terms-hero twinkle">
         <h1>Terms of Service</h1>
-        <p>Last updated: May 23, 2026 · By accessing or purchasing from Andromeda you agree to these terms in full.</p>
+        <p>Last updated: May 24, 2026 · By accessing or purchasing from Andromeda you agree to these terms.</p>
       </div>
 
-      {[
-        {
-          h:"1. Acceptance of Terms",
-          body:<><p>By accessing, browsing, or purchasing from the Andromeda website and any associated services (collectively, "the Service"), you confirm that you have read, understood, and agree to be bound by these Terms of Service ("Terms") in their entirety. If you do not agree to these Terms, you must immediately cease using the Service and may not purchase or use any products offered herein.</p><p>These Terms constitute a legally binding agreement between you ("the User", "you") and Andromeda ("we", "us", "our"). We reserve the right to amend these Terms at any time without prior notice. Continued use of the Service following any update constitutes your acceptance of the revised Terms. Major updates will be announced through our official Discord server.</p></>
-        },
-        {
-          h:"2. Nature of Products — Digital Goods",
-          body:<><p>All products sold by Andromeda are <strong style={{color:'var(--gp)'}}>digital goods</strong> delivered in the form of software license keys and/or access credentials. These goods are described in full on the product pages at the time of purchase.</p><p>By purchasing any digital product from Andromeda, you acknowledge and agree that:</p><ul><li>Digital goods, by their nature, are <strong>immediately delivered upon confirmation of payment</strong> and are <strong>not returnable</strong> once a license key has been issued or access has been granted.</li><li>The issuance of a license key constitutes the full delivery of the product. After a key is issued, the sale is final and non-refundable under all circumstances, including but not limited to: dissatisfaction with the product's features, changes in personal circumstances, change of mind, or inability to use the product due to external factors (e.g., executor incompatibility, game patches).</li><li>A delivered and activated license key can no longer be considered "new" or "resalable" and therefore has nozero value. We are under no obligation to repurchase, refund, or exchange a delivered key.</li></ul><p>In the event of an unresolved technical failure (i.e., the product is completely non-functional and we are unable to resolve it within 72 hours of you contacting support with full diagnostic details), we may, at our <strong>sole and absolute discretion</strong>, offer a replacement key or account credit. This is not a guarantee and does not constitute an admission of liability.</p></>
-        },
-        {
-          h:"3. License & Permitted Use",
-          body:<><p>Upon purchase, you receive a <strong>non-exclusive, non-transferable, single-user license</strong> to use the purchased software. This license is personal to the purchasing account holder and may not be transferred, sold, gifted, or otherwise distributed to any third party under any circumstances.</p><ul><li>You may not resell, redistribute, share, or sublicense your license key or account access to any other person.</li><li>You may not reverse-engineer, decompile, disassemble, modify, or create derivative works based on any Andromeda software.</li><li>You may not use our products to harm, harass, or gain unfair advantage against other players in a manner that violates applicable law or the Terms of Service of the relevant game platform.</li><li>You may not use our products for any commercial purpose beyond personal use.</li></ul><p>Violation of any of the above conditions constitutes a <strong>material breach of these Terms</strong> and will result in immediate and permanent termination of your license and account, without refund.</p></>
-        },
-        {
-          h:"4. Hardware Binding & Account Security",
-          body:<><p>Each license key is bound to a single hardware identifier (HWID) at the time of activation. This binding is permanent for the duration of your license.</p><ul><li>You are solely responsible for keeping your account credentials and license keys secure and confidential.</li><li>We allow <strong>one HWID reset per 30-day rolling period</strong> provided you contact our official support channels (Discord). Requests beyond this limit require verifiable proof of hardware failure.</li><li>We are not responsible for unauthorized use of your account or key resulting from your failure to secure your credentials, including but not limited to sharing your account, providing your key to others, or using your account on shared/public devices.</li><li>Sharing your license key or account with another person, or attempting to use a key on more than one HWID simultaneously, will result in automatic and permanent key revocation without refund or appeal.</li></ul></>
-        },
-        {
-          h:"5. Payments & Order Processing",
-          body:<><p>All prices are listed in United States Dollars (USD) and are subject to change without notice. Price changes apply to new orders only and do not affect completed transactions.</p><p>Payments are processed securely via third-party payment providers. By completing a purchase, you agree to the terms and conditions of the respective payment provider (e.g., Stripe, cryptocurrency network).</p><ul><li>All completed orders are final. No cancellations, modifications, or reversals are possible after payment confirmation.</li><li>Orders placed in test/sandbox mode (where applicable) are clearly marked as non-delivery and do not constitute a real transaction.</li><li>If your payment method declines, is reversed, or is flagged by our fraud detection systems, we reserve the right to cancel the order and withhold the license key.</li></ul></>
-        },
-        {
-          h:"6. Refund Policy — Final Sale",
-          body:<><p>All Andromeda digital product purchases are final and non-refundable, unless a specific exception outlined in Section 2 applies.</p><p>Specifically, the following are <strong>not valid grounds for a refund</strong>:</p><ul><li>Change of mind after purchase.</li><li>Dissatisfaction with the product's features or performance after you have had the opportunity to review the product description and feature list prior to purchase.</li><li>Inability to use the product due to game patches, executor updates, or changes in third-party software environments.</li><li>Account suspension or ban by any game platform, for any reason.</li><li>Inability to use the product due to your own hardware limitations, operating system issues, or network conditions.</li></ul><p>Any refund request must be submitted via our official Discord support channel within <strong>48 hours</strong> of purchase and must include your order ID, email, and a detailed description of the issue. We reserve the right to deny any request submitted outside this window or lacking sufficient documentation.</p></>
-        },
-        {
-          h:"7. Chargebacks & Payment Disputes",
-          body:<><p>Initiating a chargeback, payment dispute, or reversal with your bank or payment provider — without first contacting Andromeda support and allowing us a reasonable opportunity to resolve the matter — is a <strong>direct violation of these Terms</strong>.</p><ul><li>Filing a chargeback on a completed transaction will result in <strong>immediate and permanent termination</strong> of your Andromeda account and all associated license keys, without refund.</li><li>All chargebacks will be disputed through the payment provider's dispute resolution process. We reserve the right to provide transaction records, product descriptions, and delivery confirmation as evidence.</li><li>Your account may be permanently banned from future purchases on the Service if a chargeback is filed.</li><li>If a chargeback is successfully processed and we do not recover the funds, we reserve the right to pursue any available legal remedies, including but not limited to referral to collection agencies and/or civil action for the original transaction amount plus associated fees.</li></ul></>
-        },
-        {
-          h:"8. Anti-Detection & Risk Acknowledgment",
-          body:<><p>Andromeda products include built-in anti-detection measures. However, you acknowledge and agree that:</p><ul><li>No software, script, or cheat is or can be guaranteed as 100% undetectable by any game platform's anti-cheat systems, now or in the future.</li><li>Using third-party scripts or software in online games, including Roblox, may violate the game's Terms of Service and/or End User License Agreement (EULA).</li><li>Andromeda bears no responsibility for any bans, suspensions, account terminations, penalties, or other disciplinary actions taken by Roblox Corporation, any game developer, or any other third-party platform.</li><li>You use all Andromeda products at your <strong>own risk and discretion</strong>. The decision to use our products is yours alone, and you accept full and sole responsibility for its consequences.</li></ul></>
-        },
-        {
-          h:"9. Service Availability & Updates",
-          body:<><p>We strive to maintain high service availability, but do not guarantee uninterrupted access to the website, store, or license management systems. Scheduled maintenance will be announced in advance via Discord where possible.</p><p>We reserve the right to:</p><ul><li>Update, modify, or discontinue any product at any time without prior notice.</li><li>Patch software in response to game updates, security vulnerabilities, or other changes in the third-party environment.</li><li>Suspend or terminate any account that violates these Terms, without refund.</li><li>Refuse service to any individual or entity at our sole discretion, including users with a history of chargebacks, fraud, or Terms violations.</li></ul></>
-        },
-        {
-          h:"10. Intellectual Property",
-          body:<><p>All products, logos, trademarks, code, designs, text, graphics, and other content on the Andromeda website and associated software are the exclusive intellectual property of Andromeda unless explicitly stated otherwise.</p><p>Unauthorized reproduction, distribution, copying, mirroring, scraping, or use of any intellectual property belonging to Andromeda — for commercial purposes or otherwise — is strictly prohibited and may be subject to legal action under applicable copyright and trademark law.</p></>
-        },
-        {
-          h:"11. Limitation of Liability",
-          body:<><p>Andromeda and its operators, affiliates, and partners shall not be held liable for any indirect, incidental, special, consequential, or punitive damages — including but not limited to loss of profits, loss of data, loss of game accounts, business interruption, or emotional distress — arising from or in connection with the use of or inability to use the Service or any products purchased through it.</p><p>In any event where Andromeda is found liable (which we dispute and deny), our <strong>total cumulative liability shall not exceed the amount you paid for the specific product giving rise to the claim</strong>. This limitation applies regardless of the legal theory under which the claim is brought and regardless of whether Andromeda was advised of the possibility of such damages.</p><p>You agree to indemnify, defend, and hold harmless Andromeda and its operators from any claims, damages, losses, or expenses (including reasonable legal fees) arising from your use of the Service or your violation of these Terms.</p></>
-        },
-        {
-          h:"12. Account Termination",
-          body:<><p>We reserve the right to suspend, restrict, or permanently terminate your account and all associated license keys without notice, refund, or right of appeal, if:</p><ul><li>You violate any provision of these Terms.</li><li>You file or threaten to file a chargeback or payment dispute.</li><li>You share your account or license key with third parties.</li><li>You engage in fraudulent activity, including use of stolen payment methods.</li><li>You engage in harassing, abusive, or threatening behavior toward Andromeda staff or representatives.</li><li>You attempt to exploit, hack, or otherwise interfere with the normal operation of the Service.</li></ul><p>Accounts terminated under these conditions are ineligible for any refund, credit, or reinstatement. We may also block the associated email and/or HWID from future purchases.</p></>
-        },
-        {
-          h:"13. Governing Law & Dispute Resolution",
-          body:<><p>These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Andromeda operates, without regard to its conflict of law provisions.</p><p>Any dispute arising from or relating to these Terms or your use of the Service shall first be attempted to be resolved through good-faith negotiation between the parties. If resolution cannot be reached within 30 days, disputes shall be submitted to binding arbitration or the competent courts of the applicable jurisdiction.</p><p>You agree that any legal action or proceeding arising from these Terms shall be conducted individually and you waive any right to participate in or represent others in a class action or collective proceeding.</p></>
-        },
-        {
-          h:"14. Severability",
-          body:<><p>If any provision of these Terms is found to be invalid, illegal, or unenforceable by a court of competent jurisdiction, such provision shall be modified to the minimum extent necessary to make it valid and enforceable, or severed from these Terms if modification is not possible. All remaining provisions shall remain in full force and effect.</p></>
-        },
-        {
-          h:"15. Contact",
-          body:<><p>For questions, disputes, or concerns regarding these Terms or your account, contact us exclusively through our official Discord server: <strong style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>discord.gg/9MK2Zepabc</strong></p><p>Response time is typically under 2 hours during business hours. We do not respond to inquiries made through social media direct messages, third-party platforms, or any channel other than our official Discord.</p></>
-        },
-      ].map((s,i)=>(
-        <div key={i}>
-          <div className="terms-sec">
-            <h2>{s.h}</h2>
-            {s.body}
-          </div>
-          {i < 14 && <div className="terms-divider"/>}
+      <div className="twinkle-group">
+      {sections.map((s,i)=>(
+        <div key={i} className="terms-sec twinkle-child">
+          <h2>{s.h}</h2>
+          {s.body}
+          {i < sections.length - 1 && <div className="terms-divider"/>}
         </div>
       ))}
+      </div>
 
-      <div style={{marginTop:40,padding:'20px 0',borderTop:'1px solid var(--gb)',
+      <div className="twinkle" style={{marginTop:40,padding:'20px 0',borderTop:'1px solid var(--gb)',
         textAlign:'center',fontSize:13,color:'var(--tm)'}}>
         © 2026 Andromeda. All rights reserved.{' '}
         <span style={{color:'var(--gp)',cursor:'pointer'}} onClick={onBack}>← Back</span>
@@ -2401,7 +2405,7 @@ function TermsPage({ onBack }) {
 export default function App() {
   useEffect(()=>{ injectCSS(); },[]);
 
-  // Scroll-triggered animations
+  // Scroll-triggered animations (twinkle: glow + blur reveal)
   useEffect(()=>{
     const observer = new IntersectionObserver(
       entries => entries.forEach(entry => {
@@ -2410,11 +2414,12 @@ export default function App() {
           observer.unobserve(entry.target);
         }
       }),
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -50px 0px' }
     );
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Observe both twinkle and twinkle-group elements
+    document.querySelectorAll('.twinkle:not(.hero-instant), .twinkle-group').forEach(el => observer.observe(el));
     return () => observer.disconnect();
-  },[]);
+  }, [page]);
 
   const [page, setPage] = useState("home");
   const [selProduct, setSelProduct] = useState(null);

@@ -1943,29 +1943,29 @@ function HomePage({ onGoStore, onGoFaq, onGoTerms }) {
       </section>
 
       {/* STATS */}
-      <div className="stats-bar">
-        <div className="stats-inline">
+      <div className="stats-bar reveal">
+        <div className="stats-inline reveal reveal-delay-1">
           <Icon name="users" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">2,400+</div>
             <div className="stats-inline-lbl">Happy Customers</div>
           </div>
         </div>
-        <div className="stats-inline">
+        <div className="stats-inline reveal reveal-delay-1">
           <Icon name="chart" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">99.2%</div>
             <div className="stats-inline-lbl">Uptime</div>
           </div>
         </div>
-        <div className="stats-inline">
+        <div className="stats-inline reveal reveal-delay-2">
           <Icon name="clock" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">&lt; 2h</div>
             <div className="stats-inline-lbl">Support Response</div>
           </div>
         </div>
-        <div className="stats-inline">
+        <div className="stats-inline reveal reveal-delay-2">
           <Icon name="shield" size={28} style={{color:'var(--gp)'}} />
           <div className="stats-inline-content">
             <div className="stats-inline-num">0</div>
@@ -2204,17 +2204,17 @@ function FAQPage({ onGoStore, onGoTerms }) {
 
   return (
     <div className="faq-pg">
-      <div className="faq-hero">
+      <div className="faq-hero reveal">
         <h1>Frequently Asked Questions</h1>
         <p>Everything you need to know before launching. Can't find your answer?<br/>
           <span style={{color:'var(--gp)',cursor:'pointer'}} onClick={()=>window.open('https://discord.gg/9MK2Zepabc','_blank')}>Join our Discord ↗</span>
         </p>
       </div>
-      {groups.map(g=>(
-        <div key={g.title} className="faq-group">
+      {groups.map((g,gi)=>(
+        <div key={g.title} className={`faq-group reveal ${gi>0?'reveal-delay-'+(gi):''}`}>
           <div className="faq-group-title">{g.title}</div>
           {g.items.map(item=>(
-            <div key={item.id} className="faq-item">
+            <div key={item.id} className="faq-item stagger-item">
               <div className="faq-q" onClick={()=>toggle(item.id)}>
                 <span className="faq-q-text">{item.q}</span>
                 <span className={`faq-arrow ${open===item.id?'open':''}`}>▼</span>

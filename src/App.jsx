@@ -2405,6 +2405,8 @@ function TermsPage({ onBack }) {
 export default function App() {
   useEffect(()=>{ injectCSS(); },[]);
 
+  const [page, setPage] = useState("home");
+
   // Scroll-triggered animations (twinkle: glow + blur reveal)
   useEffect(()=>{
     const observer = new IntersectionObserver(
@@ -2416,12 +2418,10 @@ export default function App() {
       }),
       { threshold: 0.08, rootMargin: '0px 0px -50px 0px' }
     );
-    // Observe both twinkle and twinkle-group elements
     document.querySelectorAll('.twinkle:not(.hero-instant), .twinkle-group').forEach(el => observer.observe(el));
     return () => observer.disconnect();
   }, [page]);
 
-  const [page, setPage] = useState("home");
   const [selProduct, setSelProduct] = useState(null);
   const [cart, setCart] = useLocalStorage("andro_cart2", []);
   const [user, setUser] = useLocalStorage("andro_user", null);
